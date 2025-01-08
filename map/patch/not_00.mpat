@@ -1,0 +1,645 @@
+@ $Script_Main
+{
+    0:  Set   *GB_WorldLocation  .Location:MariosHouse
+   E0:  Call  SetSpriteShading  ( .Shading:None )
+   F0:  Call  SetCamPerspective ( .Cam:Default 00000003  25`  16`  4096` )
+  110:  Call  SetCamBGColor     ( .Cam:Default  0`  0`  0` )
+  12C:  Call  SetCamEnabled     ( .Cam:Default .True )
+  140:  Call  SetCamLeadPlayer  ( .Cam:Default .False )
+        Exec  $Script_YourOnFire
+  154:  Exec  $Script_80242C40
+  160:  Call  GetEntryID        ( *Var0 )
+  180:  Call  MakeNpcs  ( .False $NpcGroupList_8024A88C )
+  1C4:  Call  EnableGroup   ( ~Model:g100 .False )
+  22C:  Call  GetEntryID    ( *Var0 )
+  23C:  Switch  *Var0
+  248:  	Case  ==  ~Entry:Entry0
+  254:  		Call  $Function_80240310 ( )
+  260:  		Exec  $Script_8024FD70
+  26C:  		Wait  5`
+  278:  	Case  ==  ~Entry:Entry1
+  284:  		Exec  $Script_80250C5C
+  3CC:  EndSwitch
+  3D4:  Return
+  3DC:  End
+}
+
+#new:Script $Script_YourOnFire
+{
+    Loop
+        Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+        Sub *Var1 10`
+        Sub *Var2 5`
+        Call  PlayEffect        ( ~FX:Fire:LargeRed *Var0 *Var1 *Var2 *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+        Wait 1`
+        Call RemoveEffect ( *VarA )
+    EndLoop
+    Return
+    End
+}
+
+#new:NpcGroupList $NpcGroupList_8024A88C
+{
+	00000002 $NpcGroup_8024A4AC 00000000
+	00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_8024A4AC
+{
+	00000000 $NpcSettings_8024A3D0 ~Vec3f:WorldParakarry_00 % 0 -1000 0
+	00600D0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:WorldParakarry_00
+	~AnimationTable:WorldParakarry_00 % .Sprite:WorldParakarry
+	00000000 00000000 00000000 00000000 % no tattle string
+	%
+	% $NpcGroup_8024A4AC[1F0]
+	00000001 $NpcSettings_8024A3D0 ~Vec3f:Luigi_01 % 0 -1000 0
+	00001F0D $Script_Init_8024A3FC 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Luigi_01
+	~AnimationTable:Luigi_01 % .Sprite:Luigi
+	00000000 00000000 00000000 00000000 % no tattle string
+}
+
+#new:NpcSettings $NpcSettings_8024A3D0
+{
+	00000000 00180018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+
+#new:Script $Script_Init_8024A3FC
+{
+    0:  Call  SetNpcCollisionSize   ( .Npc:Self  46`  26` )
+   18:  Call  GetEntryID    ( *Var0 )
+   28:  Switch  *Var0
+   34:  	CaseOR  ==  ~Entry:Entry2
+   40:  	CaseOR  ==  ~Entry:Entry3
+   4C:  		Call  SetNpcAnimation   ( .Npc:Self 00820007 )
+   60:  		Call  SetNpcPos ( .Npc:Self  196`  44`  -37` )
+   7C:  		Call  SetNpcYaw ( .Npc:Self  270` )
+   90:  	EndCaseGroup
+   98:  EndSwitch
+   A0:  Return
+   A8:  End
+}
+
+#new:Script $Script_80242C40
+{
+    0:  Switch  *GB_StoryProgress
+    C:  	Case  ==  .Story:Intro % FFFFFF80
+   18:  		Call  FadeOutMusic  ( 00000000 000001F4 )
+   2C:  	EndCaseGroup
+   34:  	Case  >=  .Story:Epilogue % 60
+   40:  		Call  FadeOutMusic  ( 00000000 000001F4 )
+   54:  	EndCaseGroup
+   5C:  	Default
+   64:  		Call  SetMusicTrack ( 00000000 .Song:MarioBrosHouse 00000000 00000008 )
+   80:  EndSwitch
+   88:  Thread
+   90:  	Call  GetEntryID    ( *Var0 )
+   A0:  	Switch  *Var0
+   AC:  		Case  ==  ~Entry:Entry0
+   B8:  			Wait  300`
+   C4:  			Call  PlayAmbientSounds ( .AmbientSounds:Birds )
+   D4:  		Default
+   DC:  			Call  PlayAmbientSounds ( .AmbientSounds:Birds )
+   EC:  	EndSwitch
+   F4:  EndThread
+   FC:  Return
+  104:  End
+}
+
+#new:Script $Script_8024FD70
+{
+    0:  Call  DisablePlayerInput    ( .True )
+   10:  Thread
+   18:  	Wait  5`
+   24:  	Call  SetMusicTrack ( 00000000 .Song:MailCall 00000000 00000008 )
+   40:  EndThread
+   48:  Call  InterpPlayerYaw   (  90`  0` )
+   5C:  Call  SetPlayerPos  (  -50`  30`  -80` )
+   74:  Call  SetNpcPos     ( 00000001  220`  30`  -80` )
+   90:  Call  SetNpcPos     ( 00000000  720`  220`  -150` )
+   AC:  Call  SetNpcYaw     ( 00000000  270` )
+   C0:  Call  EnableGroup   ( ~Model:g94 .False )
+   D4:  Call  EnableGroup   ( ~Model:g100 .True )
+   E8:  Call  UseSettingsFrom   ( .Cam:Default  550`  0`  20` )
+  104:  Call  SetPanTarget  ( .Cam:Default  550`  0`  20` )
+  120:  Call  SetCamDistance    ( .Cam:Default  550` )
+  134:  Call  SetCamPitch   ( .Cam:Default *Fixed[15.0] *Fixed[-14.0] )
+  14C:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
+  160:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+  178:  Wait  1`
+  184:  Call  SetCamDistance    ( .Cam:Default  450` )
+  198:  Call  SetCamSpeed   ( .Cam:Default *Fixed[0.7] )
+  1AC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+  1C4:  Thread
+  1CC:  	Wait  10`
+  1D8:  	Call  MakeLerp  ( 00000000 00000046 0000003C .Easing:Linear )
+  1F4:  	Loop
+  200:  		Call  UpdateLerp ( )
+  20C:  		Call  TranslateGroup    ( ~Model:g108 *Var0 00000000 00000000 )
+  228:  		SetF  *Var2  00000000
+  238:  		SubF  *Var2  *Var0
+  248:  		Call  TranslateGroup    ( ~Model:g106 *Var2 00000000 00000000 )
+  264:  		If  *Var1  ==  00000000
+  274:  			BreakLoop
+  27C:  		EndIf
+  284:  		Wait  1`
+  290:  	EndLoop
+  298:  EndThread
+  2A0:  Thread
+  2A8:  	Wait  30`
+  2B4:  	Call  MakeLerp  ( 00000000 00000032 00000028 .Easing:Linear )
+  2D0:  	Loop
+  2DC:  		Call  UpdateLerp ( )
+  2E8:  		Call  TranslateGroup    ( ~Model:g109 *Var0 00000000 00000000 )
+  304:  		SetF  *Var2  00000000
+  314:  		SubF  *Var2  *Var0
+  324:  		Call  TranslateGroup    ( ~Model:g107 *Var2 00000000 00000000 )
+  340:  		If  *Var1  ==  00000000
+  350:  			BreakLoop
+  358:  		EndIf
+  360:  		Wait  1`
+  36C:  	EndLoop
+  374:  EndThread
+  37C:  Thread
+  384:  	Wait  50`
+  390:  	Call  MakeLerp  ( 00000000 00000032 00000028 .Easing:Linear )
+  3AC:  	Loop
+  3B8:  		Call  UpdateLerp ( )
+  3C4:  		Call  TranslateGroup    ( ~Model:g105 *Var0 00000000 00000000 )
+  3E0:  		Call  TranslateGroup    ( ~Model:g102 *Var0 00000000 00000000 )
+  3FC:  		SetF  *Var2  00000000
+  40C:  		SubF  *Var2  *Var0
+  41C:  		Call  TranslateGroup    ( ~Model:g103 *Var2 00000000 00000000 )
+  438:  		Call  TranslateGroup    ( ~Model:g104 *Var2 00000000 00000000 )
+  454:  		Call  TranslateGroup    ( ~Model:g101 *Var2 00000000 00000000 )
+  470:  		If  *Var1  ==  00000000
+  480:  			BreakLoop
+  488:  		EndIf
+  490:  		Wait  1`
+  49C:  	EndLoop
+  4A4:  EndThread
+  4AC:  Wait  120`
+  4B8:  Call  NpcFlyTo  ( 00000000  430`  20`  -165`  60`  -10` .Easing:Linear )
+  4E0:  Call  InterpNpcYaw      ( 00000000  45`  10` )
+  4F8:  Wait  20`
+  504:  Call  PlaySoundAtNpc    ( 00000000 000000E0 00000000 )
+  51C:  Thread
+  524:  	Call  TranslateModel    ( ~Model:o222 00000002 00000000 00000000 )
+  540:  	Call  TranslateModel    ( ~Model:o223 00000002 00000000 00000000 )
+  55C:  	Call  TranslateModel    ( ~Model:o224 00000002 00000000 00000000 )
+  578:  	Wait  1`
+  584:  	Call  TranslateModel    ( ~Model:o222 FFFFFFFD 00000000 00000000 )
+  5A0:  	Call  TranslateModel    ( ~Model:o223 FFFFFFFD 00000000 00000000 )
+  5BC:  	Call  TranslateModel    ( ~Model:o224 FFFFFFFD 00000000 00000000 )
+  5D8:  	Wait  1`
+  5E4:  	Call  TranslateModel    ( ~Model:o222 00000002 00000000 00000000 )
+  600:  	Call  TranslateModel    ( ~Model:o223 00000002 00000000 00000000 )
+  61C:  	Call  TranslateModel    ( ~Model:o224 00000002 00000000 00000000 )
+  638:  	Wait  1`
+  644:  	Call  TranslateModel    ( ~Model:o222 FFFFFFFD 00000000 00000000 )
+  660:  	Call  TranslateModel    ( ~Model:o223 FFFFFFFD 00000000 00000000 )
+  67C:  	Call  TranslateModel    ( ~Model:o224 FFFFFFFD 00000000 00000000 )
+  698:  	Wait  1`
+  6A4:  	Call  TranslateModel    ( ~Model:o222 00000000 00000000 00000000 )
+  6C0:  	Call  TranslateModel    ( ~Model:o223 00000000 00000000 00000000 )
+  6DC:  	Call  TranslateModel    ( ~Model:o224 00000000 00000000 00000000 )
+  6F8:  EndThread
+  700:  Wait  35`
+  70C:  Call  InterpNpcYaw  ( 00000000  220`  5` )
+  724:  Wait  10`
+  730:  Call  SpeakToPlayer ( 00000000 00040006 00040001 00000005 0000001E ) % Mail call!
+  750:  Wait  10`
+  75C:  Call  NpcFlyTo      ( 00000000  360`  260`  60`  60`  -10` .Easing:Linear )
+  784:  Wait  30`
+  790:  Exec  $Script_8024FCE4
+  79C:  Wait  10`
+  7A8:  Call  SetNpcAnimation   ( 00000001 0082000A )
+  7BC:  Exec  $Script_8024F5A4 *VarA
+  7CC:  Call  SetNpcSpeed   ( 00000001 *Fixed[4.0] )
+  7E0:  Call  NpcMoveTo     ( 00000001  450`  -80`  0` )
+  7FC:  Call  NpcMoveTo     ( 00000001  430`  -165`  0` )
+  818:  Call  SetNpcAnimation   ( 00000001 00820004 )
+  82C:  Kill  *VarA
+  838:  Wait  20`
+  844:  Call  PlaySoundAtNpc    ( 00000001 000000E0 00000000 )
+  85C:  Thread
+  864:  	Call  TranslateModel    ( ~Model:o222 00000001 00000000 00000000 )
+  880:  	Call  TranslateModel    ( ~Model:o223 00000001 00000000 00000000 )
+  89C:  	Call  TranslateModel    ( ~Model:o224 00000001 00000000 00000000 )
+  8B8:  	Wait  1`
+  8C4:  	Call  TranslateModel    ( ~Model:o222 FFFFFFFE 00000000 00000000 )
+  8E0:  	Call  TranslateModel    ( ~Model:o223 FFFFFFFE 00000000 00000000 )
+  8FC:  	Call  TranslateModel    ( ~Model:o224 FFFFFFFE 00000000 00000000 )
+  918:  	Wait  1`
+  924:  	Call  TranslateModel    ( ~Model:o222 00000001 00000000 00000000 )
+  940:  	Call  TranslateModel    ( ~Model:o223 00000001 00000000 00000000 )
+  95C:  	Call  TranslateModel    ( ~Model:o224 00000001 00000000 00000000 )
+  978:  	Wait  1`
+  984:  	Call  TranslateModel    ( ~Model:o222 FFFFFFFE 00000000 00000000 )
+  9A0:  	Call  TranslateModel    ( ~Model:o223 FFFFFFFE 00000000 00000000 )
+  9BC:  	Call  TranslateModel    ( ~Model:o224 FFFFFFFE 00000000 00000000 )
+  9D8:  	Wait  1`
+  9E4:  	Call  TranslateModel    ( ~Model:o222 00000000 00000000 00000000 )
+  A00:  	Call  TranslateModel    ( ~Model:o223 00000000 00000000 00000000 )
+  A1C:  	Call  TranslateModel    ( ~Model:o224 00000000 00000000 00000000 )
+  A38:  EndThread
+  A40:  Wait  2`
+  A4C:  Call  SetNpcAnimation   ( 00000001 00820005 )
+  A60:  Wait  40`
+  A6C:  Call  InterpNpcYaw  ( 00000001  270`  5` )
+  A84:  Call  SetNpcAnimation   ( 00000001 0082000B )
+  A98:  Exec  $Script_8024F5A4 *VarA
+  AA8:  Call  NpcMoveTo     ( 00000001  450`  -80`  0` )
+  AC4:  Call  NpcMoveTo     ( 00000001  290`  -70`  0` )
+  AE0:  Kill  *VarA
+  AEC:  Call  EnableGroup   ( ~Model:g20 .True )
+  B00:  Call  EnableGroup   ( ~Model:g21 .True )
+  B14:  Call  EnableGroup   ( ~Model:g49 .True )
+  B28:  Call  EnableModel   ( ~Model:g56 .True )
+  B3C:  Call  $Function_80241C9C ( )
+  B48:  Call  RotateGroup   ( ~Model:g60 0000005A 00000001 00000000 00000000 )
+  B68:  Call  RotateGroup   ( ~Model:g34 0000005A FFFFFFFF 00000000 00000000 )
+  B88:  Call  EnableGroup   ( ~Model:g60 .False )
+  B9C:  Call  EnableGroup   ( ~Model:g34 .False )
+  BB0:  Call  UseSettingsFrom   ( .Cam:Default  250`  30`  -80` )
+  BCC:  Call  SetPanTarget  ( .Cam:Default  250`  30`  -80` )
+  BE8:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
+  BFC:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+  C14:  Call  $Function_80241D1C ( )
+  C20:  Exec  $Script_8024FB88
+  C2C:  Wait  10`
+  C38:  Call  SetNpcAnimation   ( 00000001 00820009 )
+  C4C:  Exec  $Script_8024F5A4 *VarA
+  C5C:  Call  SetNpcSpeed   ( 00000001 *Fixed[2.0] )
+  C70:  Call  NpcMoveTo     ( 00000001  240`  -80`  0` )
+  C8C:  Call  SetNpcAnimation   ( 00000001 00820005 )
+  CA0:  Kill  *VarA
+  CAC:  Call  SpeakToPlayer ( 00000001 00820015 00820005 00000000 0000001F ) % Hey, Mario! We got a letter from Princess Peach!
+  CCC:  Wait  10`
+  CD8:  Exec  $Script_8024FAAC
+  CE4:  Thread
+  CEC:  	Call  SetNpcAnimation   ( 00000001 00820009 )
+  D00:  	Exec  $Script_8024F5A4 *VarA
+  D10:  	Call  NpcMoveTo ( 00000001  230`  -130`  0` )
+  D2C:  	Call  NpcMoveTo ( 00000001  110`  -110`  0` )
+  D48:  	Call  SetNpcAnimation   ( 00000001 00820005 )
+  D5C:  	Kill  *VarA
+  D68:  	Call  SetNpcVar ( 00000001 00000000 00000000 )
+  D80:  EndThread
+  D88:  Wait  20`
+  D94:  Call  802D1270  ( 00000046 FFFFFFB0 *Fixed[2.0] )
+  DAC:  Call  802D1270  ( 00000046 FFFFFF92 *Fixed[2.0] )
+  DC4:  Wait  10`
+  DD0:  Call  SpeakToPlayer     ( 00000001 00820015 00820005 00000000 00000020 ) % I'll read it to you, OK?
+  DF0:  Call  SetNpcAnimation   ( 00000001 00820018 )
+  E04:  Wait  20`
+  E10:  Call  SetNpcAnimation   ( 00000001 00820006 )
+  E24:  Call  SpeakToPlayer     ( 00000001 00820016 00820006 00000000 00000021 ) % All right, let's see...
+  E44:  Call  SetNpcAnimation   ( 00000001 00820019 )
+  E58:  Wait  10`
+  E64:  Call  SetMusicTrack     ( 00000000 .Song:PrisonerPeachTheme 00000000 00000008 )
+  E80:  Wait  5`
+  E8C:  Call  ClearAmbientSounds    ( 000000FA )
+  E9C:  Call  GotoMapSpecial    ( $ASCII_80253008 00000003 00000007 ) % osr_00
+  EB4:  Wait  15`
+  EC0:  Call  ClearAmbientSounds    ( 000000FA )
+  ED0:  Wait  100`
+  EDC:  Return
+  EE4:  End
+}
+
+#new:ASCII $ASCII_80253008
+{
+	"osr_00"
+}
+
+#new:Script $Script_8024FAAC
+{
+    0:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
+   14:  Call  SetNpcVar     ( 00000001 00000000 00000001 )
+   2C:  Loop
+   38:  	Call  GetNpcPos     ( 00000001 *Var0 *Var1 *Var2 )
+   54:  	Sub   *Var0  00000014
+   64:  	Call  SetPanTarget  ( .Cam:Default *Var0 *Var1 *Var2 )
+   80:  	Wait  1`
+   8C:  	Call  GetNpcVar     ( 00000001 00000000 *Var0 )
+   A4:  	If  *Var0  ==  00000000
+   B4:  		BreakLoop
+   BC:  	EndIf
+   C4:  EndLoop
+   CC:  Return
+   D4:  End
+}
+
+#new:Script $Script_8024F5A4
+{
+    0:  Call  GetNpcAnimation   ( 00000001 *Var0 )
+   14:  Switch  *Var0
+   20:  	CaseOR  ==  00820008
+   2C:  	CaseOR  ==  00820009
+   38:  	CaseOR  ==  0082001D
+   44:  		Set   *Var1  0000000A
+   54:  	EndCaseGroup
+   5C:  	CaseOR  ==  0082000A
+   68:  	CaseOR  ==  0082000B
+   74:  	CaseOR  ==  0082001E
+   80:  		Set   *Var1  00000005
+   90:  	EndCaseGroup
+   98:  EndSwitch
+   A0:  ChildThread
+   A8:  	Loop
+   B4:  		Call  PlaySoundAtNpc    ( 00000001 B0000019 00000000 )
+   CC:  		Wait  *Var1
+   D8:  	EndLoop
+   E0:  EndChildThread
+   E8:  Loop
+   F4:  	Wait  1`
+  100:  EndLoop
+  108:  Return
+  110:  End
+}
+
+#new:Script $Script_8024FCE4
+{
+    0:  Call  EnableGroup   ( ~Model:g72 .True )
+   14:  ExecWait  $Script_8024FB88
+   20:  Call  EnableGroup   ( ~Model:g72 .False )
+   34:  Return
+   3C:  End
+}
+
+#new:Script $Script_8024FB88
+{
+    0:  Call  PlaySoundAtCollider   ( ~Collider:o246 .Sound:BasicDoorOpen 00000000 )
+   18:  Call  MakeLerp  ( 00000000 00000050 0000000E .Easing:QuadraticOut )
+   34:  Loop
+   40:  	Call  UpdateLerp ( )
+   4C:  	Call  RotateGroup   ( ~Model:g14 *Var0 00000000 00000001 00000000 )
+   6C:  	Wait  1`
+   78:  	If  *Var1  ==  00000000
+   88:  		BreakLoop
+   90:  	EndIf
+   98:  EndLoop
+   A0:  Wait  30`
+   AC:  Call  MakeLerp  ( 00000050 00000000 00000008 .Easing:QuadraticOut )
+   C8:  Loop
+   D4:  	Call  UpdateLerp ( )
+   E0:  	Call  RotateGroup   ( ~Model:g14 *Var0 00000000 00000001 00000000 )
+  100:  	Wait  1`
+  10C:  	If  *Var1  ==  00000000
+  11C:  		BreakLoop
+  124:  	EndIf
+  12C:  EndLoop
+  134:  Call  PlaySoundAtCollider   ( ~Collider:o246 .Sound:BasicDoorClose 00000000 )
+  14C:  Return
+  154:  End
+}
+
+#new:Script $Script_80250C5C
+{
+    0:  Call  DisablePlayerInput    ( .True )
+   10:  Call  SetNpcPos     ( 00000001  220`  30`  -70` )
+   2C:  Call  SetNpcYaw     ( 00000001  90` )
+   40:  Call  UseSettingsFrom       ( .Cam:Default  320`  30`  -70` )
+   5C:  Call  SetPanTarget  ( .Cam:Default  320`  30`  -70` )
+   78:  Call  SetCamSpeed   ( .Cam:Default *Fixed[90.0] )
+   8C:  Call  PanToTarget   ( .Cam:Default 00000000 00000001 )
+   A4:  Wait  60`
+   B0:  Call  SetMusicTrack ( 00000000 .Song:PeachsCastleParty 00000001 00000008 )
+   CC:  Exec  $Script_8024FCE4
+   D8:  Thread
+   E0:  	Wait  10`
+   EC:  	Call  SetNpcSpeed   ( 00000001 *Fixed[3.0] )
+  100:  	Call  SetNpcAnimation   ( 00000001 0082000A )
+  114:  	Exec  $Script_8024F5A4 *VarA
+  124:  	Call  NpcMoveTo     ( 00000001  320`  -70`  0` )
+  140:  	Call  NpcMoveTo     ( 00000001  460`  -70`  0` )
+  15C:  	Call  NpcMoveTo     ( 00000001  570`  -170`  0` )
+  178:  	Call  SetNpcAnimation   ( 00000001 00820004 )
+  18C:  	Kill  *VarA
+  198:  EndThread
+  1A0:  Call  802D1270      ( 00000140 FFFFFFBA *Fixed[3.0] )
+  1B8:  Call  PanToTarget   ( .Cam:Default 00000000 00000000 )
+  1D0:  Call  802D1270      ( 000001CC FFFFFFBA *Fixed[3.0] )
+  1E8:  Call  802D1270      ( 0000023A FFFFFF56 *Fixed[3.0] )
+  200:  Call  SetPlayerJumpscale    ( *Fixed[1.0] )
+  210:  Call  PlayerJump    ( ~Vec3d:JumpDest_80250E6C  15` )
+  22C:  ExecWait  $Script_8024F6BC
+  238:  Call  SetNpcAnimation       ( 00000001 0082000C )
+  24C:  Wait  10`
+  258:  Thread
+  260:  	Call  SetNpcAnimation   ( 00000001 0082000D )
+  274:  	Call  PlaySoundAtNpc    ( 00000001 .Sound:Jump 00000000 )
+  28C:  	Wait  7`
+  298:  	Wait  7`
+  2A4:  	Call  SetNpcAnimation   ( 00000001 00820004 )
+  2B8:  	Call  PlaySoundAtNpc    ( 00000001 .Sound:SoftLand 00000000 )
+  2D0:  EndThread
+  2D8:  Call  SetNpcJumpscale   ( 00000001 *Fixed[1.0] )
+  2EC:  Call  NpcJump0  ( 00000001  594`  30`  -216`  15` )
+  30C:  ExecWait  $Script_8024F840
+  318:  Exec  $Script_80242D78
+  324:  Call  GotoMap   ( $ASCII_80253010 00000005 ) % mac_00
+  338:  Wait  100`
+  344:  Call  DisablePlayerInput    ( .False )
+  354:  Return
+  35C:  End
+}
+
+#new:ASCII $ASCII_80253010
+{
+	"mac_00"
+}
+
+#new:Script $Script_80242D78
+{
+    0:  Call  $Function_80240000 ( )
+    C:  Return
+   14:  End
+}
+
+#new:Script $Script_8024F6BC
+{
+    0:  Call  DisablePlayerInput    ( .True )
+   10:  Call  DisablePlayerPhysics  ( .True )
+   20:  Call  HidePlayerShadow  ( .True )
+   30:  Set   *Var0  00000004
+   40:  Call  $Function_80241870 ( )
+   4C:  Call  PlayerMoveTo      ( *Var1 *Var3  3` )
+   64:  Set   *Var0  00000004
+   74:  Call  $Function_80241870 ( )
+   80:  Call  SetPlayerPos      ( *Var1 *Var2 *Var3 )
+   98:  Wait  2`
+   A4:  Call  PlaySoundAtPlayer ( 00000163 00000000 )
+   B8:  Call  GetPlayerPos      ( *Var0 *Var1 *Var2 )
+   D0:  Thread
+   D8:  	Wait  4`
+   E4:  	Loop  00000028
+   F0:  		Sub   *Var1  00000001
+  100:  		Call  SetPlayerPos  ( *Var0 *Var1 *Var2 )
+  118:  		Wait  1`
+  124:  	EndLoop
+  12C:  EndThread
+  134:  Call  802D286C  ( 00000800 )
+  144:  Call  802D2520  ( 00010002 00000005 00000002 00000001 00000001 00000000 )
+  168:  Wait  25`
+  174:  Return
+  17C:  End
+}
+
+#new:Script $Script_8024F840
+{
+    0:  Call  SetNpcFlagBits    ( 00000001 00000200 .False )
+   18:  Call  SetNpcFlagBits    ( 00000001 00000008 .True )
+   30:  Call  EnableNpcShadow   ( 00000001 .False )
+   44:  Set   *Var0  00000004
+   54:  Call  $Function_80241870 ( )
+   60:  Call  NpcMoveTo ( 00000001 *Var1 *Var3  3` )
+   7C:  Set   *Var0  00000004
+   8C:  Call  $Function_80241870 ( )
+   98:  Call  SetNpcPos ( 00000001 *Var1 *Var2 *Var3 )
+   B4:  Wait  2`
+   C0:  Call  PlaySoundAtNpc    ( 00000001 00000163 00000000 )
+   D8:  Call  SetNpcAnimation   ( 00000001 00820000 )
+   EC:  Thread
+   F4:  	Call  GetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+  110:  	Add   *Var1  00000007
+  120:  	Call  SetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+  13C:  	Loop  00000028
+  148:  		Sub   *Var1  00000001
+  158:  		Call  SetNpcPos ( 00000001 *Var0 *Var1 *Var2 )
+  174:  		Wait  1`
+  180:  	EndLoop
+  188:  EndThread
+  190:  Call  802CFE2C  ( 00000001 00000800 )
+  1A4:  Call  802CFD30  ( 00000001 00000005 00000002 00000001 00000001 00000000 )
+  1C8:  Wait  25`
+  1D4:  Return
+  1DC:  End
+}
+
+#new:Function $Function_80240310
+{
+    0:  ADDIU     SP, SP, FFE8
+    4:  SW        RA, 10 (SP)
+    8:  JAL       ~Func:set_map_transition_effect
+    C:  LI        A0, 4
+   10:  LW        RA, 10 (SP)
+   14:  LI        V0, 2
+   18:  JR        RA
+   1C:  ADDIU     SP, SP, 18
+}
+
+#new:Function $Function_80241C9C
+{
+    0:  ADDIU     SP, SP, FFE8
+    4:  LI        A0, 10D
+    8:  LI        A1, FFFF
+    C:  LI        A2, 1
+   10:  SW        RA, 10 (SP)
+   14:  JAL       8011B950
+   18:  COPY      A3, A2
+   1C:  CLEAR     A0
+   20:  COPY      A1, A0
+   24:  COPY      A2, A0
+   28:  JAL       ~Func:set_background_color_blend
+   2C:  LI        A3, FF
+   30:  LA        V0, 800B1D80
+   38:  SH        R0, 2C (V0)
+   3C:  SH        R0, 2E (V0)
+   40:  SH        R0, 30 (V0)
+   44:  LW        RA, 10 (SP)
+   48:  LI        V0, 2
+   4C:  JR        RA
+   50:  ADDIU     SP, SP, 18
+}
+
+#new:Function $Function_80241D1C
+{
+    0:  ADDIU     SP, SP, FFE8
+    4:  CLEAR     A0
+    8:  LI        A1, 3E8
+    C:  SW        RA, 10 (SP)
+   10:  JAL       8005566C
+   14:  LI        A2, 3F
+   18:  LW        RA, 10 (SP)
+   1C:  LI        V0, 2
+   20:  JR        RA
+   24:  ADDIU     SP, SP, 18
+}
+
+#new:Function $Function_80240000
+{
+    0:  ADDIU     SP, SP, FFE8
+    4:  CLEAR     A0
+    8:  SW        RA, 10 (SP)
+    C:  JAL       800554E8
+   10:  LI        A1, 1F4
+   14:  LW        RA, 10 (SP)
+   18:  LI        V0, 2
+   1C:  JR        RA
+   20:  ADDIU     SP, SP, 18
+}
+
+#new:Function $Function_80241870
+{
+    0:  ADDIU     SP, SP, FFE0
+    4:  SW        S1, 14 (SP)
+    8:  COPY      S1, A0
+    C:  SW        RA, 1C (SP)
+   10:  SW        S2, 18 (SP)
+   14:  JAL       ~Func:get_current_map_header
+   18:  SW        S0, 10 (SP)
+   1C:  COPY      A0, S1
+   20:  LI        A1, *Var0
+   28:  JAL       ~Func:get_variable
+   2C:  COPY      S2, V0
+   30:  COPY      A0, S1
+   34:  LUI       A1, FE36
+   38:  LW        V1, 14 (S2)
+   3C:  SLL       S0, V0, 4
+   40:  ADDU      V1, S0, V1
+   44:  LWC1      F0, 0 (V1)
+   48:  TRUNC.W.S F2, F0
+   4C:  MFC1      A2, F2
+   50:  JAL       ~Func:set_variable
+   54:  ORI       A1, A1, 3C81
+   58:  COPY      A0, S1
+   5C:  LW        V0, 14 (S2)
+   60:  LUI       A1, FE36
+   64:  ADDU      V0, S0, V0
+   68:  LWC1      F0, 4 (V0)
+   6C:  TRUNC.W.S F2, F0
+   70:  MFC1      A2, F2
+   74:  JAL       ~Func:set_variable
+   78:  ORI       A1, A1, 3C82
+   7C:  COPY      A0, S1
+   80:  LW        V0, 14 (S2)
+   84:  LUI       A1, FE36
+   88:  ADDU      V0, S0, V0
+   8C:  LWC1      F0, 8 (V0)
+   90:  TRUNC.W.S F2, F0
+   94:  MFC1      A2, F2
+   98:  JAL       ~Func:set_variable
+   9C:  ORI       A1, A1, 3C83
+   A0:  COPY      A0, S1
+   A4:  LW        V0, 14 (S2)
+   A8:  LUI       A1, FE36
+   AC:  ADDU      S0, S0, V0
+   B0:  LWC1      F0, C (S0)
+   B4:  TRUNC.W.S F2, F0
+   B8:  MFC1      A2, F2
+   BC:  JAL       ~Func:set_variable
+   C0:  ORI       A1, A1, 3C84
+   C4:  LW        RA, 1C (SP)
+   C8:  LW        S2, 18 (SP)
+   CC:  LW        S1, 14 (SP)
+   D0:  LW        S0, 10 (SP)
+   D4:  LI        V0, 2
+   D8:  JR        RA
+   DC:  ADDIU     SP, SP, 20
+}
