@@ -1,0 +1,70 @@
+@ $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+    Call  MakeNpcs  ( .False $NpcGroupList_8024A88C )
+    Exec  $Script_TestFires
+	Exec  $Script_SetupMusic
+	Exec  $Script_EnterMap
+	Return
+	End
+}
+
+#new:NpcGroupList $NpcGroupList_8024A88C
+{
+	00000001 $NpcGroup_8024A4AC 00000000
+	00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_8024A4AC
+{
+	00000000 $NpcSettings_8024A3D0 ~Vec3f:Princess % 0 -1000 0
+	00001F0D $Script_Init_8024A3FD 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Princess
+	~AnimationTable:Princess % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+}
+
+#new:NpcSettings $NpcSettings_8024A3D0
+{
+	00000000 00180018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+
+#new:Script $Script_Init_8024A3FD
+{
+   68:  Call  SetNpcYaw ( 0 90` )
+  348:  Return
+  350:  End
+}
+
+@ $Script_EnterMap
+{
+    Call DisablePlayerInput ( .True )
+    Call SpeakToPlayer ( 0 00D60002 00D60004 00000000 000A000E )
+    Call ShowChoice ( 000A0004 )
+    Call CloseMessage ()
+    Wait 30`
+    Call SpeakToPlayer ( 0 00D60002 00D60004 00000000 000A000F )
+    Call  GotoMapSpecial        ( "not_03" 00000000 00000007 ) % kmr_20
+	Return
+	End
+}
+
+#new:Script $Script_TestFires
+{
+    Loop
+        Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+        Sub *Var1 10`
+        Sub *Var2 6`
+        Call  PlayEffect        ( ~FX:Fire:LargeRed *Var0 *Var1 *Var2 *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+        Wait 1`
+        Call RemoveEffect ( *VarA )
+    EndLoop
+    Return
+    End
+}

@@ -1,0 +1,391 @@
+@ $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Exec  $Script_SetupMusic
+    Exec  $Script_TestFires
+    Exec  $Script_80241FD8
+	Exec  $Script_EnterMap
+	Return
+	End
+}
+
+#new:Script $Script_TestFires
+{
+    Loop
+        Call GetPlayerPos ( *Var0 *VarF *Var2 )
+        Call SetPlayerPos ( -426` *VarF 3` )
+        Call GetModelCenter ( ~Model:poppo )
+        Set *Debug[0] *Var0
+        Set *Debug[1] *Var2
+        Sub *VarF 72`
+        Call TranslateGroup ( ~Model:poppo 0` *VarF 2` )
+        Add *VarF 59`
+        Call  PlayEffect        ( ~FX:Fire:LargeRed -426` *VarF -4` *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+        Wait 1`
+        Call RemoveEffect ( *VarA )
+        If *MapFlag[0] == .True
+            BreakLoop
+        EndIf
+    EndLoop
+    Return
+    End
+}
+
+#new:Script $Script_80241FD8
+{
+    0:  Call  EnableModel   ( ~Model:km .False )
+   14:  Call  SetModelFlags ( ~Model:km 00000100 .True )
+   2C:  Call  CloneModel    ( ~Model:km 00002710 )
+   40:  Call  CloneModel    ( ~Model:km 00002711 )
+   54:  Call  CloneModel    ( ~Model:km 00002712 )
+   68:  Call  CloneModel    ( ~Model:km 00002713 )
+   7C:  Call  CloneModel    ( ~Model:km 00002714 )
+   90:  Call  CloneModel    ( ~Model:km 00002715 )
+   A4:  Call  CloneModel    ( ~Model:km 00002716 )
+   B8:  Call  CloneModel    ( ~Model:km 00002717 )
+   CC:  Call  CloneModel    ( ~Model:km 00002718 )
+   E0:  Call  CloneModel    ( ~Model:km 00002719 )
+   F4:  Set   *MapFlag[05]  .False
+  104:  Set   *MapVar[0]  FFFFE890
+  114:  Set   *MapVar[1]  0000000A
+  124:  Exec  $Script_802407B8
+        Exec  $Script_MoveTrack
+  130:  Wait  1`
+  13C:  Return
+  144:  End
+}
+
+#new:Script $Script_MoveTrack
+{
+    Call  ShowMessageAtScreenPos    ( 000A0011  160`  40` )
+    Call  SetMusicTrack ( 00000000 .Song:RidingTheRails 00000000 00000008 )
+    Call  MakeLerp  ( 00000000 -13177` 600` .Easing:CosIn )
+  1F4:  	Loop
+  200:  		Call  UpdateLerp ( )
+  20C:  		Call  TranslateGroup    ( ~Model:track *Var0 00000000 00000000 )
+  264:  		If  *Var1  ==  00000000
+  274:  			BreakLoop
+  27C:  		EndIf
+  284:  		Wait  1`
+  290:  	EndLoop
+    Set *MapFlag[0] .True
+    Call PlaySoundAtModel ( ~Model:boo .Sound:BombBlast 00000000 )
+    Call PlayerJump ( 200` 200` 200` 20` )
+    Call GotoMap ( "not_04" 00000000 )
+    Return
+    End
+}
+
+#new:Script $Script_802407B8
+{
+    0:  Label  0
+    C:  Set   *Var0  *MapVar[0]
+  854:  Call  $Function_802401B0 ( )
+  860:  Call  RotateModel       ( ~Model:11 *Var0 00000000 00000000 00000001 )
+  880:  Call  RotateModel       ( ~Model:12 *Var0 00000000 00000000 00000001 )
+  8A0:  Call  RotateModel       ( ~Model:13 *Var0 00000000 00000000 00000001 )
+  8C0:  Call  $Function_80240208 ( )
+  8CC:  Call  RotateModel       ( ~Model:10 *Var0 00000000 00000000 00000001 )
+  8EC:  Call  $Function_80240020    ( *Var2 *Var0 00000000 FFFFFFEC 0000004B 00000000 00000000 )
+  914:  Call  $Function_80240020    ( *Var2 *Var1 FFFFFFF6 0000000A 0000004B 00000000 FFFFFFA6 )
+  93C:  Call  TranslateModel    ( ~Model:14 *Var0 *Var1 00000000 )
+  958:  Call  $Function_80240020    ( *Var2 *Var0 00000000 FFFFFFEC 0000004B 00000000 00000000 )
+  980:  Add   *Var0  00000005
+  990:  Call  TranslateModel    ( ~Model:16 *Var0 FFFFFFF2 00000000 )
+  9AC:  Call  $Function_80240020    ( *Var2 *Var0 00000000 FFFFFFEC 0000004B 00000000 00000000 )
+  9D4:  Call  $Function_80240020    ( *Var2 *Var1 FFFFFFF6 0000000A 0000004B 00000000 FFFFFFA6 )
+  9FC:  Call  TranslateModel    ( ~Model:15 *Var0 *Var1 00000000 )
+  A18:  Call  $Function_80240020    ( *Var2 *Var0 FFFFFFD8 00000028 0000004B 00000000 0000005A )
+  A40:  Call  RotateModel       ( ~Model:15 *Var0 00000000 00000000 00000001 )
+  A60:  Call  $Function_80240020    ( *VarC *Var0 FFFFFFE2 0000001E 0000000A 00000000 00000000 )
+  A88:  Call  RotateModel       ( ~Model:09 *Var0 00000000 00000000 00000001 )
+  AA8:  If  *MapVar[1]  !=  00000000
+  AB8:  	If  *VarD  ==  00000000
+  AC8:  		Thread
+  AD0:  			Wait  18`
+  ADC:  			Exec  $Script_80240640
+  AE8:  		EndThread
+  AF0:  	EndIf
+  AF8:  EndIf
+  B00:  If  *VarD  <=  00000014
+  B10:  	Call  $Function_80240020    ( *VarD *Var0 *Fixed[0.703125] *Fixed[1.0] 0000000A 00000000 000000B4 )
+  B38:  	Call  $Function_80240020    ( *VarD *Var2 *Fixed[0.0] *Fixed[0.296875] 0000000A 00000000 000000B4 )
+  B60:  	SetF  *Var1  *Fixed[0.296875]
+  B70:  	SubF  *Var1  *Var2
+  B80:  	AddF  *Var1  *Fixed[1.0]
+  B90:  	Call  ScaleModel    ( ~Model:07 *Var1 *Var0 *Var1 )
+  BAC:  	Call  ScaleModel    ( ~Model:08 *Var1 *Var0 *Var1 )
+  BC8:  Else
+  BD0:  	SetF  *Var0  *Fixed[1.0]
+  BE0:  	SetF  *Var2  *Fixed[0.296875]
+  BF0:  	SetF  *Var1  *Fixed[0.296875]
+  C00:  	SubF  *Var1  *Var2
+  C10:  	AddF  *Var1  *Fixed[1.0]
+  C20:  	Call  ScaleModel    ( ~Model:07 *Var1 *Var0 *Var1 )
+  C3C:  	Call  ScaleModel    ( ~Model:08 *Var1 *Var0 *Var1 )
+  C58:  EndIf
+  C60:  If  *MapFlag[00]  ==  .True
+  C70:  	Set   *Var8  0000000A
+  C80:  	Set   *Flag[01]  .True
+  C90:  	Set   *MapFlag[00]  .False
+  CA0:  EndIf
+  CA8:  If  *MapFlag[01]  ==  .True
+  CB8:  	Set   *Var8  FFFFFFF6
+  CC8:  	Set   *Flag[01]  .True
+  CD8:  	Set   *MapFlag[01]  .False
+  CE8:  EndIf
+  CF0:  If  *MapFlag[02]  ==  .True
+  D00:  	Set   *Var8  0000000A
+  D10:  	Set   *Flag[02]  .True
+  D20:  	Set   *MapFlag[02]  .False
+  D30:  EndIf
+  D38:  If  *MapFlag[03]  ==  .True
+  D48:  	Set   *Var8  FFFFFFF6
+  D58:  	Set   *Flag[02]  .True
+  D68:  	Set   *MapFlag[03]  .False
+  D78:  EndIf
+  D80:  If  *Flag[01]  ==  .True
+  D90:  	Add   *Var9  *Var8
+  DA0:  	If  *Var9  >=  0000005A
+  DB0:  		Set   *Var9  0000005A
+  DC0:  		Set   *Flag[01]  .False
+  DD0:  	EndIf
+  DD8:  	If  *Var9  <=  00000000
+  DE8:  		Set   *Var9  00000000
+  DF8:  		Set   *Flag[01]  .False
+  E08:  	EndIf
+  E10:  EndIf
+  E18:  If  *Flag[02]  ==  .True
+  E28:  	Add   *VarA  *Var8
+  E38:  	If  *VarA  >=  0000005A
+  E48:  		Set   *VarA  0000005A
+  E58:  		Set   *Flag[02]  .False
+  E68:  	EndIf
+  E70:  	If  *VarA  <=  00000000
+  E80:  		Set   *VarA  00000000
+  E90:  		Set   *Flag[02]  .False
+  EA0:  	EndIf
+  EA8:  EndIf
+  EB0:  Call  RotateModel   ( ~Model:omote *Var9 00000000 FFFFFFFF 00000000 )
+  ED0:  Call  RotateModel   ( ~Model:ura *Var9 00000000 FFFFFFFF 00000000 )
+  EF0:  Call  RotateModel   ( ~Model:omote2 *VarA 00000000 00000001 00000000 )
+  F10:  Call  RotateModel   ( ~Model:ura2 *VarA 00000000 00000001 00000000 )
+  F30:  If  *MapFlag[04]  ==  .True
+  F40:  	If  *MapFlag[05]  ==  .False
+  F50:  		Set   *Var0  *MapVar[0]
+  F60:  		Add   *Var0  FFFFFE57
+  F70:  		Add   *Var1  0000004B
+  F80:  		Add   *Var2  00000014
+  F90:  		Call  SetPlayerPos  ( *Var0 *Var1 *Var2 )
+  FA8:  	Else
+  FB0:  		Set   *Var0  *MapVar[0]
+  FC0:  		Add   *Var0  FFFFFEB1
+  FD0:  		Add   *Var1  0000004B
+  FE0:  		Add   *Var2  00000014
+  FF0:  		Call  SetPlayerPos  ( *Var0 *Var1 *Var2 )
+ 1008:  	EndIf
+ 1010:  EndIf
+ 1018:  Add   *MapVar[0]  *MapVar[1]
+ 1028:  Set   *Var0  *MapVar[0]
+ 1038:  Div   *Var0  0000004B
+ 1048:  If  *Var0  !=  *VarE
+ 1058:  	Set   *VarE  *Var0
+ 1068:  	Set   *VarD  FFFFFFFF
+ 1078:  	Add   *VarB  00000001
+ 1088:  	If  *VarB  ==  0000000A
+ 1098:  		Set   *VarB  00000000
+ 10A8:  	EndIf
+ 10B0:  EndIf
+ 10B8:  AddF  *VarD  00000001
+ 10C8:  If  *VarD  >  000003E8
+ 10D8:  	Set   *VarD  000003E8
+ 10E8:  EndIf
+ 10F0:  AddF  *VarC  00000001
+ 1100:  If  *VarC  >  000003E8
+ 1110:  	Set   *VarC  00000000
+ 1120:  EndIf
+ 1128:  Wait  1`
+ 1134:  Goto  0
+ 1140:  Return
+ 1148:  End
+}
+
+#new:Script $Script_80240640
+{
+    0:  Call  PlaySoundAtModel  ( ~Model:07 B000001A 00000000 )
+   28:  If  *MapFlag[05]  ==  .False
+   38:  	AddF  *Var0  FFFFFECA
+   48:  Else
+   50:  	AddF  *Var0  FFFFFE3E
+   60:  EndIf
+   68:  SetF  *Var1  0000008C
+   78:  SetF  *Var2  00000000
+   88:  SetF  *Var3  *Fixed[1.0]
+   98:  SetF  *Var4  *Fixed[3.0]
+   A8:  Add   *VarB  00002710
+   B8:  Call  EnableModel   ( *VarB .True )
+   CC:  Loop  00000014
+   D8:  	Call  TranslateModel    ( *VarB *Var0 *Var1 *Var2 )
+   F4:  	Call  ScaleModel        ( *VarB *Var3 *Var3 00000001 )
+  110:  	AddF  *Var1  *Var4
+  120:  	AddF  *Var3  *Fixed[0.046875]
+  130:  	MulF  *Var4  *Fixed[0.90625]
+  140:  	Wait  1`
+  14C:  EndLoop
+  154:  Call  EnableModel   ( *VarB .False )
+  168:  Return
+  170:  End
+}
+
+#new:Function $Function_802401B0
+{
+    0:  LIF       F0, -2.384375
+    C:  ADDIU     SP, SP, FFE8
+   10:  SW        S0, 10 (SP)
+   14:  COPY      S0, A0
+   18:  SW        RA, 14 (SP)
+   1C:  LWC1      F12, 8C (S0)
+   20:  CVT.S.W   F12, F12
+   24:  MUL.S     F12, F12, F0
+   28:  JAL       ~Func:clamp_angle
+   2C:  NOP
+   30:  LI        A1, *Var0
+   38:  MFC1      A2, F0
+   3C:  JAL       ~Func:set_float_variable
+   40:  COPY      A0, S0
+   44:  LW        RA, 14 (SP)
+   48:  LW        S0, 10 (SP)
+   4C:  LI        V0, 2
+   50:  JR        RA
+   54:  ADDIU     SP, SP, 18
+}
+
+#new:Function $Function_80240208
+{
+    0:  LIF       F0, -2.384375
+    C:  ADDIU     SP, SP, FFE8
+   10:  SW        S0, 10 (SP)
+   14:  COPY      S0, A0
+   18:  SW        RA, 14 (SP)
+   1C:  LWC1      F12, 8C (S0)
+   20:  CVT.S.W   F12, F12
+   24:  MUL.S     F12, F12, F0
+   28:  NOP
+   2C:  LIF       F0, 0.5960938
+   38:  NOP
+   3C:  MUL.S     F12, F12, F0
+   40:  JAL       ~Func:clamp_angle
+   44:  NOP
+   48:  LI        A1, *Var0
+   50:  MFC1      A2, F0
+   54:  JAL       ~Func:set_float_variable
+   58:  COPY      A0, S0
+   5C:  LW        RA, 14 (SP)
+   60:  LW        S0, 10 (SP)
+   64:  LI        V0, 2
+   68:  JR        RA
+   6C:  ADDIU     SP, SP, 18
+}
+
+#new:Function $Function_80240020
+{
+    0:  ADDIU     SP, SP, FFB8
+    4:  SW        S2, 18 (SP)
+    8:  COPY      S2, A0
+    C:  SW        RA, 28 (SP)
+   10:  SW        S5, 24 (SP)
+   14:  SW        S4, 20 (SP)
+   18:  SW        S3, 1C (SP)
+   1C:  SW        S1, 14 (SP)
+   20:  SW        S0, 10 (SP)
+   24:  SDC1      F24, 40 (SP)
+   28:  SDC1      F22, 38 (SP)
+   2C:  SDC1      F20, 30 (SP)
+   30:  LW        S0, C (S2)
+   34:  LW        S4, 0 (S0)
+   38:  ADDIU     S0, S0, 4
+   3C:  JAL       ~Func:get_variable
+   40:  COPY      A1, S4
+   44:  COPY      S3, V0
+   48:  LW        S5, 0 (S0)
+   4C:  ADDIU     S0, S0, 4
+   50:  LW        A1, 0 (S0)
+   54:  ADDIU     S0, S0, 4
+   58:  JAL       ~Func:get_float_variable
+   5C:  COPY      A0, S2
+   60:  LW        A1, 0 (S0)
+   64:  ADDIU     S0, S0, 4
+   68:  COPY      A0, S2
+   6C:  JAL       ~Func:get_float_variable
+   70:  MOV.S     F24, F0
+   74:  LW        A1, 0 (S0)
+   78:  ADDIU     S0, S0, 4
+   7C:  COPY      A0, S2
+   80:  JAL       ~Func:get_variable
+   84:  MOV.S     F20, F0
+   88:  LW        A1, 0 (S0)
+   8C:  ADDIU     S0, S0, 4
+   90:  COPY      A0, S2
+   94:  JAL       ~Func:get_variable
+   98:  COPY      S1, V0
+   9C:  COPY      A0, S2
+   A0:  LW        A1, 0 (S0)
+   A4:  JAL       ~Func:get_float_variable
+   A8:  COPY      S0, V0
+   AC:  LIF       F2, 180.0
+   B4:  LIF       F4, 3.141592
+   C0:  DIV.S     F0, F0, F2
+   C4:  MUL.S     F22, F0, F4
+   C8:  NOP
+   CC:  SUB.S     F20, F20, F24
+   D0:  LIF       F0, 0.5
+   D8:  NOP
+   DC:  MUL.S     F20, F20, F0
+   E0:  NOP
+   E4:  BEQ       S0, R0, .o104
+   E8:  SLT       V0, S1, S3
+   EC:  BEQ       V0, R0, .o104
+   F0:  COPY      A0, S2
+   F4:  COPY      S3, S1
+   F8:  COPY      A1, S4
+   FC:  JAL       ~Func:set_variable
+  100:  COPY      A2, S1
+        .o104
+  104:  LIF       F0, 3.141592
+  110:  MTC1      S3, F12
+  114:  NOP
+  118:  CVT.S.W   F12, F12
+  11C:  MUL.S     F12, F12, F0
+  120:  NOP
+  124:  MTC1      S1, F0
+  128:  NOP
+  12C:  CVT.S.W   F0, F0
+  130:  DIV.S     F12, F12, F0
+  134:  JAL       ~Func:cos_rad
+  138:  ADD.S     F12, F12, F22
+  13C:  MUL.S     F0, F20, F0
+  140:  NOP
+  144:  ADD.S     F2, F24, F20
+  148:  SUB.S     F2, F2, F0
+  14C:  COPY      A0, S2
+  150:  MFC1      A2, F2
+  154:  JAL       ~Func:set_float_variable
+  158:  COPY      A1, S5
+  15C:  LW        RA, 28 (SP)
+  160:  LW        S5, 24 (SP)
+  164:  LW        S4, 20 (SP)
+  168:  LW        S3, 1C (SP)
+  16C:  LW        S2, 18 (SP)
+  170:  LW        S1, 14 (SP)
+  174:  LW        S0, 10 (SP)
+  178:  LDC1      F24, 40 (SP)
+  17C:  LDC1      F22, 38 (SP)
+  180:  LDC1      F20, 30 (SP)
+  184:  LI        V0, 2
+  188:  JR        RA
+  18C:  ADDIU     SP, SP, 48
+}

@@ -1,0 +1,276 @@
+@ $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+    Call  EnableGroup ( ~Model:WoodBot .False )
+    Exec  $Script_DanceFloor
+    Exec  $Script_TestFires
+	Call  MakeNpcs  ( .False $NpcGroupList_8024A88C )
+    Exec  $Script_SetupMusic
+	Exec  $Script_EnterMap
+	Return
+	End
+}
+
+#new:Script $Script_TestFires
+{
+    Loop
+        Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+        Sub *Var1 10`
+        Sub *Var2 6`
+        Call  PlayEffect        ( ~FX:Fire:LargeRed *Var0 *Var1 *Var2 *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+        Wait 1`
+        Call RemoveEffect ( *VarA )
+    EndLoop
+    Return
+    End
+}
+
+#new:NpcGroupList $NpcGroupList_8024A88C
+{
+	0000000C $NpcGroup_8024A4AC 00000000
+	00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_8024A4AC
+{
+	00000000 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy1 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy1
+	~AnimationTable:Fuzzy1 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000001 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy2 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy2
+	~AnimationTable:Fuzzy2 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000002 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy3 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy3
+	~AnimationTable:Fuzzy3 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000003 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy4 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy4
+	~AnimationTable:Fuzzy4 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000004 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy5 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy5
+	~AnimationTable:Fuzzy5 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000005 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy6 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy6
+	~AnimationTable:Fuzzy6 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000006 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy7 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy7
+	~AnimationTable:Fuzzy7 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000007 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy8 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy8
+	~AnimationTable:Fuzzy8 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000008 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy9 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy9
+	~AnimationTable:Fuzzy9 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000009 $NpcSettings_8024A3D0 ~Vec3f:DJ % 0 -1000 0
+	00001F0D $Script_Init_8024A3FD 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:DJ
+	~AnimationTable:DJ % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    0000000A $NpcSettings_8024A3D0 ~Vec3f:Director % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Director
+	~AnimationTable:Director % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    0000000B $NpcSettings_8024A3D0 ~Vec3f:Camera % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Camera
+	~AnimationTable:Camera % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+}
+
+#new:NpcSettings $NpcSettings_8024A3D0
+{
+	00000000 00180018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+
+#new:Script $Script_Init_8024A3FD
+{
+   68:  Call  SetNpcYaw ( 0 270` )
+  348:  Return
+  350:  End
+}
+
+#new:Script $Script_DanceFloor
+{
+    Loop
+        Call EnableGroup ( ~Model:Floor1 .False )
+        Call EnableGroup ( ~Model:Floor2 .False )
+        Call EnableGroup ( ~Model:Floor3 .False )
+        Call EnableGroup ( ~Model:Floor4 .False )
+        Call EnableModel ( ~Model:Lights1 .False )
+        Call EnableModel ( ~Model:Lights2 .False )
+        Call EnableModel ( ~Model:Lights3 .False )
+        Call EnableModel ( ~Model:Lights4 .False )
+        Label 0
+        Call RandInt ( 3 *Var0 )
+        If *MapVar[0] == *Var0
+            Goto 0
+        EndIf
+        Set *MapVar[0] *Var0
+        Switch *Var0
+        Case == 0
+            Call EnableGroup ( ~Model:Floor1 .True )
+        Case == 1
+            Call EnableGroup ( ~Model:Floor2 .True )
+        Case == 2
+            Call EnableGroup ( ~Model:Floor3 .True )
+        Case == 3
+            Call EnableGroup ( ~Model:Floor4 .True )
+        EndSwitch
+        Label 1
+        Call RandInt ( 3 *Var0 )
+        If *MapVar[1] == *Var0
+            Goto 1
+        EndIf
+        Set *MapVar[1] *Var0
+        Switch *Var0
+        Case == 0
+            Call EnableGroup ( ~Model:Lights1 .True )
+        Case == 1
+            Call EnableGroup ( ~Model:Lights2 .True )
+        Case == 2
+            Call EnableGroup ( ~Model:Lights3 .True )
+        Case == 3
+            Call EnableGroup ( ~Model:Lights4 .True )
+        EndSwitch
+        Wait 60`
+    EndLoop
+    Return
+    End
+}
+
+@ $Script_EnterMap
+{
+    Call DisablePlayerInput ( .True )
+    Wait 60`
+    Call SpeakToPlayer ( 9 003C0001 003C0001 00000000 000A0015 )
+    Call UseSettingsFrom ( .Cam:Default 100` 0` 0` )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Wait 30`
+    Call NpcMoveTo ( 9 100` 0` 30` )
+    Wait 60`
+    Call  SetNpcAnimation ( 9` 003C000C )
+  184:  Set   *Var4  00000000 
+    Thread
+  194:  Loop  1E 
+  1A0:  	Add   *Var4  00000030 
+  1B0:  	Mod   *Var4  00000168 
+  1C0:  	Call  SetNpcYaw ( 9` *Var4 )
+  1D4:  	Wait  1`
+  1E0:  EndLoop
+        Call SetNpcYaw ( 9` 270` )
+        Call SetNpcAnimation ( 9` 003C000A )
+    EndThread
+    Call  ShowMessageAtScreenPos    ( 000A0016  160`  40` )
+    Wait 60`
+    Call SpeakToPlayer ( 9 003C0001 003C000A 00000000 000A0017 )
+    Call UseSettingsFrom ( .Cam:Default -100` 0` 0` )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Wait 30`
+    Call ShowChoice ( 000A0018 )
+    Call CloseMessage ()
+    Call ShowChoice ( 000A0019 )
+    Call CloseMessage ()
+    Call ShowChoice ( 000A001A )
+    Call CloseMessage ()
+    Call ShowChoice ( 000A001B )
+    Call CloseMessage ()
+    Wait 60`
+    Call UseSettingsFrom ( .Cam:Default 100` 0` 0` )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Wait 30`
+    Call SpeakToPlayer ( 3 002B000C 002B0001 00000000 000A001C )
+    Call SpeakToPlayer ( 9 003C0001 003C0001 00000000 000A001D )
+    Wait 60`
+    Call SpeakToPlayer ( 9 003C0001 003C000A 00000000 000A001E )
+    Call UseSettingsFrom ( .Cam:Default -100` 0` 0` )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Wait 30`
+    Call ShowChoice ( 000A001F )
+    Call CloseMessage ()
+    Call ShowChoice ( 000A0020 )
+    Call CloseMessage ()
+    Call ShowChoice ( 000A0021 )
+    Call CloseMessage ()
+    Call ShowChoice ( 000A0022 )
+    Call CloseMessage ()
+    Wait 60`
+    Call UseSettingsFrom ( .Cam:Default 100` 0` 0` )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Wait 30`
+    Call SpeakToPlayer ( 9 003C0001 003C000A 00000000 000A0023 )
+    Call EnableGroup ( ~Model:WoodBot .True )
+    Call  MakeLerp  ( 00000000 -200` 20` .Easing:CosIn )
+  1F4:  	Loop
+  200:  		Call  UpdateLerp ( )
+  20C:  		Call  TranslateGroup    ( ~Model:WoodBot 00000000 *Var0 00000000 )
+  264:  		If  *Var1  ==  00000000
+  274:  			BreakLoop
+  27C:  		EndIf
+  284:  		Wait  1`
+  290:  	EndLoop
+    Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+    Call PlayerJump1 ( *Var0 *Var1 *Var2 10` )
+    Call SpeakToPlayer ( 9 003C0001 003C000A 00000000 000A0024 )
+    Call UseSettingsFrom ( .Cam:Default -100` 0` 0` )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Wait 30`
+    Call SetPlayerAnimation ( .PlayerAnim:ReadyJump )
+    Wait 60`
+    Call  FadeOutMusic  ( 00000000 500` ) % usually between 500-1000
+    Call SpeakToPlayer ( A 00A90001 00A90006 00000000 000A0025 )
+    Call SetPlayerSpeed ( *Fixed[2.0] )
+    Call PlayerMoveTo ( *Var0 150` 0` )
+    Call UseSettingsFrom ( .Cam:Default -250` 0` 150` )
+    Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+    Call PlayerMoveTo ( -250` 150` 0` )
+    Wait 10`
+    Call SpeakToPlayer ( A 00A90001 00A90006 00000000 000A0026 )
+    Return
+    End
+}

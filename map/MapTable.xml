@@ -569,8 +569,13 @@
 		<Map name="tst_20" nickname="Pipes Gallery"/>
 	</Area>
 	<Area name="not" nickname="Not a Drop">
-		<Map name="not_01"/>
-		<Map name="not_00"/>
+		<Map name="not_01" nickname="End of Eternity"/>
+		<Map name="not_00" nickname="Intro"/>
+		<Map name="not_02" nickname="Interview 1"/>
+		<Map name="not_03" nickname="Train Challenge"/>
+		<Map name="not_04" nickname="Big Race"/>
+		<Map name="not_05" nickname="Hotel Room"/>
+		<Map name="not_06" nickname="Disco"/>
 	</Area>
 	<Resource name="mac_tex" compressed="false"/>
 	<Resource name="tik_tex" compressed="false"/>

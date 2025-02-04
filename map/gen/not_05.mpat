@@ -1,9 +1,9 @@
-% Auto-generated script for not_01
+% Auto-generated script for not_05
 
 #new:Header $Header
 {
 	[MainScript] $Script_Main
-	[Background] 80200000
+	[Background] 00000000
 	[EntryList] $EntryList
 	[EntryCount] 1
 }
@@ -30,7 +30,7 @@
 {
 	PUSH    RA
 	LIA     A0, 800B0CF0
-	LIA     A1, "kmr_tex"
+	LIA     A1, "mac_tex"
 	JAL     800654F0 % sprintf
 	RESERVED
 	CLEAR  V0
@@ -40,7 +40,7 @@
 #new:Script $Script_SetupMusic
 {
 	Call  FadeOutMusic  ( 00000000 500` ) % usually between 500-1000
-	Call  PlayAmbientSounds  ( .AmbientSounds:Wind )
+	Call  ClearAmbientSounds ( 250` )
 	Return
 	End
 }

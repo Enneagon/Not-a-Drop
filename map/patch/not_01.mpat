@@ -6,10 +6,89 @@
 	Call  SetCamEnabled      ( .Cam:Default .True
 	Call  SetCamLeadPlayer   ( .Cam:Default .False )
 	Exec  $Script_SetupMusic
+    Call  MakeNpcs  ( .False $NpcGroupList_8024A88C )
+    Bind  $Script_TacoStand .Trigger:WallPressA ~Collider:StallFront 1 0
     Exec  $Script_TestFires
 	Exec  $Script_EnterMap
 	Return
 	End
+}
+
+#new:NpcGroupList $NpcGroupList_8024A88C
+{
+	00000003 $NpcGroup_8024A4AC 00000000
+	00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_8024A4AC
+{
+	00000000 $NpcSettings_8024A3D0 ~Vec3f:Taco % 0 -1000 0
+	00600D0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Taco
+	~AnimationTable:Taco % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+	%
+	00000001 $NpcSettings_8024A3D0 ~Vec3f:Goombario % 0 -1000 0
+	00001F0D $Script_Init_8024A3FC 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Goombario
+	~AnimationTable:Goombario % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+	%
+	00000002 $NpcSettings_8024A3D0 ~Vec3f:Guard % 0 -1000 0
+	00001F0D $Script_Init_8024A3FD 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Guard
+	~AnimationTable:Guard % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+}
+
+#new:NpcSettings $NpcSettings_8024A3D0
+{
+	00000000 00180018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+
+#new:Script $Script_Init_8024A3FC
+{
+   68:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024C9C0 )
+  348:  Return
+  350:  End
+}
+
+#new:Script $Script_Init_8024A3FD
+{
+   68:  Call  BindNpcInteract   ( .Npc:Self $Script_Interact_8024C9C1 )
+  348:  Return
+  350:  End
+}
+
+#new:Script $Script_Interact_8024C9C0
+{
+   10:  Call  SpeakToPlayer ( .Npc:Self 00010008 00010001 00000000 000A0006 ) % Good luck, Mario. You just have to save that princ ...
+  290:  Return
+  298:  End
+}
+
+#new:Script $Script_Interact_8024C9C1
+{
+    Switch *MapVar[0]
+    Case == 0
+        Call SpeakToPlayer ( .Npc:Self 00870204 00870201 00000000 000A000A )
+    Case == 1
+        Call SpeakToPlayer ( .Npc:Self 00870204 00870201 00000000 000A000B )
+        Set *MapVar[0] 2`
+        Bind $Script_TacoStandTwo .Trigger:WallPressA ~Collider:StallFront 1 0
+    Case == 2
+        Call SpeakToPlayer ( .Npc:Self 00870204 00870201 00000000 000A0010 )
+    Case == 3
+        Call DisablePlayerInput ( .True )
+        Call SpeakToPlayer ( .Npc:Self 00870204 00870201 00000000 000A000D )
+        Call  GotoMapSpecial        ( "not_02" 00000000 00000007 ) % kmr_20
+    EndSwitch
+  290:  Return
+  298:  End
 }
 
 #new:Script $Script_TestFires
@@ -17,11 +96,61 @@
     Loop
         Call GetPlayerPos ( *Var0 *Var1 *Var2 )
         Sub *Var1 10`
-        Sub *Var2 5`
+        Sub *Var2 6`
         Call  PlayEffect        ( ~FX:Fire:LargeRed *Var0 *Var1 *Var2 *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
         Wait 1`
         Call RemoveEffect ( *VarA )
     EndLoop
+    Return
+    End
+}
+
+@ $Script_EnterMap
+{
+    Call DisablePlayerInput ( .True )
+    Call  ShowMessageAtScreenPos    ( 000A0001  160`  40` ) % Here's the box where letters addressed to Mario go ...
+    Call SetNpcAnimation ( 1 00010003 )
+    Call NpcMoveTo ( 1 -200` -50` 0 )
+    Call SetNpcAnimation ( 1 00010001 )
+    Call SpeakToPlayer ( 1 00010008 00010001 00000000 000A0002 )
+    Call  SetPlayerSpeed    ( *Fixed[1.0] )
+    Call PlayerMoveTo ( -300` 0` 0 )
+    Call SpeakToPlayer ( 1 00010008 00010001 00000000 000A0003 )
+    Call ShowChoice ( 000A0004 )
+    Call CloseMessage ()
+    Wait 30`
+    Call SpeakToPlayer ( 1 00010008 00010001 00000000 000A0005 )
+    Call SetNpcAnimation ( 1 00010002 )
+    Call NpcMoveTo ( 1 -150` -100` 0 )
+    Call SetNpcAnimation ( 1 00010001 )
+    Call DisablePlayerInput ( .False )
+    Return
+    End
+}
+
+#new:Script $Script_TacoStand
+{
+    Call DisablePlayerInput ( .True )
+    Call SpeakToPlayer ( 0 00880004 00880001 00000000 000A0007 )
+    Call ShowChoice ( 000A0008 )
+    Call CloseMessage ()
+    Call SpeakToPlayer ( 0 00880004 00880001 00000000 000A0009 )
+    Call ShowGotItem ( .Item:Mistake .True 00000000 )
+    Set *MapVar[0] 1`
+    Unbind
+    Call DisablePlayerInput ( .False )
+    Return
+    End
+}
+
+#new:Script $Script_TacoStandTwo
+{
+    Call DisablePlayerInput ( .True )
+    Call SpeakToPlayer ( 0 00880004 00880001 00000000 000A000C )
+    Call ShowGotItem ( .Item:DeluxeFeast .True 00000000 )
+    Set *MapVar[0] 3`
+    Unbind
+    Call DisablePlayerInput ( .False )
     Return
     End
 }

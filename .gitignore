@@ -21,3 +21,6 @@ raw
 
 # Altered Files
 !/strings/patch/*.*
+!/audio/bgm/81_318.bgm
+!/audio/bgm/2F_104.bgm
+!/audio/bgm/31_105.bgm

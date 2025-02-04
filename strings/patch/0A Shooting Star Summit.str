@@ -1,3 +1,9 @@
+#message:1D:002
+{
+	[Style Inspect]
+	The smell is...[Pause 15] is...[Pause 15] something.[Wait][End]
+}
+
 #message:0A:000
 {
 	[Style Narrate]
@@ -20,8 +26,7 @@
 #message:0A:001
 {
 	[Style Narrate]
-	Some twenty-odd hours of[BR]
-	adventuring later...[Wait][End]
+	Five minutes later...[Wait][End]
 }
 
 #message:0A:002
@@ -48,11 +53,11 @@
 
 #message:0A:004
 {
-	[Style Choice pos=70,90 size=205,75]
+	[Style Choice pos=65,90 size=215,75]
 	[StartChoice]
 	[Option 0]It's probably nothing.[BR]
 	[Option 1]All I a-need is some-a[BR]
-	[Right 10]tasty spaghetti, wahoo![BR]
+	[Right 20]tasty spaghetti, wahoo![BR]
 	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
 	[EndChoice][End]
 }
@@ -85,7 +90,7 @@
 	[Style Choice pos=70,90 size=205,63]
 	[StartChoice]
 	[Option 0]One Mushwrap Supreme,[BR]
-	[Right 10]please. No pickles.[BR]
+	[Right 20]please. No pickles.[BR]
 	[Option 1]AAAAAAAAAAAAAAAAAAH![BR]
 	[EndChoice][End]
 }
@@ -118,273 +123,358 @@
 	Excuse me, but I specifically[BR]
 	requested extra pickles.[BR]
 	[Wait][Next]
-	I'm sorry, but I'm going to have[BR]
-	to report this to your supervisor.[Wait][End]
+	Well? Don't just stare at me.[BR]
+	Go back and get some.[Wait][End]
 }
 
 #message:0A:00C
 {
 	[Style Right]
-	Mario...[BR]
-	[Pause 10]It looks like things are a lot[BR]
-	more serious than I thought...[BR]
-	[Wait][Next]
-	Do you think the princess is[BR]
-	going to be all right?[BR]
-	I'm really worried about her.[Wait][End]
+	Huh? Wuzzat? Pickles? Well, why[BR]
+	didn't ya say so?[Wait][End]
 }
 
 #message:0A:00D
 {
 	[Style Right]
-	[Voice Star][PrintRising][Size 48]Ouch!![BR]
-	[Pause 20][End]
+	Ah, that's better. No point in[BR]
+	saving all of existence without[BR]
+	pickles![BR]
+	[Wait][Next]
+	However, I'm still going to have[BR]
+	to report this incident to your[BR]
+	supervisor.[BR]
+	[Wait][End]
 }
 
 #message:0A:00E
 {
 	[Style Right]
-	[Voice Star]Oh, sorry, sorry, so sorry![BR]
-	I'm in a huge hurry!![Wait][End]
+	All right, Mario. It's time for[BR]
+	your yearly performance review.[BR]
+	[Wait][Next]
+	Now, your jumping and hammering[BR]
+	has been on point. And your[BR]
+	dedication to saving kidnapped[BR]
+	princesses is commendable.[BR]
+	[Wait][Next]
+	However, your attitude lately[BR]
+	has, frankly, been dragging[BR]
+	everyone down.[BR]
+	[Wait][Next]
+	You've been a real grump for[BR]
+	some time now, and no one can[BR]
+	figure out why. What do you have[BR]
+	to say for yourself?[Yield][End]
 }
 
 #message:0A:00F
 {
 	[Style Right]
-	[Voice Star]Oh...it's...!?[BR]
-	[Pause 10]You're Mario, aren't you!?[BR]
+	...Well. I'll take that under[BR]
+	advisement.[BR]
 	[Wait][Next]
-	Thank the Stars I found you![Wait][End]
+	Regardless, the incident with the[BR]
+	pickles cannot be ignored. You've[BR]
+	been slacking.[BR]
+	[Wait][Next]
+	For that reason, for the[BR]
+	foreseeable future you'll be[BR]
+	spending time at a...[Pause 15] 'resort'[BR]
+	for troubled plumbers.[BR]
+	[Wait][Next]
+	At this...[Pause 15] 'resort'...[Pause 15] you'll relearn[BR]
+	the skills required to be a great,[BR]
+	heroic plumber again.[BR]
+	[Wait][Next]
+	Your train leaves immediately.[BR]
+	Shoo, shoo![Wait][End]
 }
 
 #message:0A:010
 {
 	[Style Right]
-	[Voice Star]How do you do?[BR]
-	[Pause 10]I'm Twink.[BR]
-	[Pause 10]Princess Peach asked me to[BR]
-	bring something to you.[Wait][End]
+	Well?[Wait][End]
 }
 
 #message:0A:011
 {
-	[Style Right]
-	[Voice Star]Ahhh[Pause 5].[Pause 5].[Pause 5].[Pause 15] Yes, here it is![BR]
-	[Wait][Yield][End]
+	[Style Narrate]
+	[Down 15]Press [A] to jump over obstacles![Wait][End]
 }
 
 #message:0A:012
 {
-	[Next]
-	[Voice Star]Here, this is it![BR]
-	[Pause 5]Take it![Wait][End]
+	[Style Right][InputOff]
+	And the winner is...[BR]
+	[Pause 40][Right 150]...This guy?[BR]
+	[InputOn][Wait][Next]
+	What a performance! I didn't[BR]
+	even know he was racing until he[BR]
+	crossed the finish line![Wait][End]
 }
 
 #message:0A:013
 {
 	[Style Right]
-	[Voice Star]That's the "[Color 0x20]Lucky Star[Color 0x0A]" from[BR]
-	Princess Peach.[BR]
+	Well done, mysterious stranger![BR]
+	You've just won the 2025 Fuzzy[BR]
+	Grand Prix![BR]
 	[Wait][Next]
-	Now that it's yours, you can use[BR]
-	the "[Color 0x20]action command[Color 0x0A]."[BR]
+	You must be overwhelmed by[BR]
+	emotion! Oh, but that's not the[BR]
+	only thing you'll be overwhelmed[BR]
+	by![BR]
 	[Wait][Next]
-	May I take a moment to explain[BR]
-	what the action command is?[BR]
-	[Yield][End]
+	I hope you're hungry, because[BR]
+	the grand prize is a lifetime[BR]
+	supply of perfectly cooked[BR]
+	spaghetti![BR]
+	[Wait][Next]
+	Give it up for our winner, folks![BR]
+	We'll have your winnings delivered[BR]
+	straight to your hotel room.
+	[Wait][End]
 }
 
 #message:0A:014
 {
-	[Voice Star][Next]
-	This is important, Mario.[BR]
-	[Pause 10]I think you'll want to know about[BR]
-	this.[BR]
-	[Yield][End]
+	[Style Narrate]
+	[Down 15]Mash [A] to eat spaghetti![Wait][End]
 }
 
 #message:0A:015
 {
-	[Voice Star][Next]
-	Oh! OK! Great![BR]
-	[Pause 10]I don't even have to explain.[Wait][End]
+	[Style Right]
+	Hm? Who's this?[BR]
+	[Wait][Next]
+	You're tellin' me...[Pause 15][BR]
+	A new challenger approaches?[Wait][End]
 }
 
 #message:0A:016
 {
-	[Voice Star][Next]
-	OK.[BR]
-	[Pause 10]Let me explain.[BR]
-	[Wait][Next]
-	[Pause 10]Let me see...[BR]
-	[Pause 10][Wait][Next]
-	Hang on. You! Behind Mario![BR]
-	[Pause 10]Would you mind helping me[BR]
-	demonstrate something?[Wait][End]
+	[Style Narrate]
+	[NOTE] Super Mario[BR]
+	[Right 110]VS[BR]
+	[Right 130]DJ Trukknutz [NOTE][Wait][End]
 }
 
 #message:0A:017
 {
 	[Style Right]
-	Me?[BR]
-	[Pause 10]The name's Goombario.[BR]
-	[Pause 10]Of course I'll help![Wait][End]
+	[NOTE] Hey bro, your flow's lookin'[BR]
+	flat as your rhymes! [NOTE][BR]
+	[Wait][Next]
+	[NOTE] You got lyrics so poor,[BR]
+	they're practically crimes! [NOTE][BR]
+	[Wait][Next]
+	[NOTE] You oughta go back to playin'[BR]
+	doctor with pills! [NOTE][BR]
+	[Wait][Next]
+	[NOTE] Yo' princess needs a man with[BR]
+	REAL oratin' skills! [NOTE]
+	[Wait][End]
 }
 
 #message:0A:018
 {
-	[Style Right]
-	[Voice Star]Well, Mario and Goombario.[BR]
-	Let's begin![Wait][End]
+	[Style Choice pos=45,30 size=235,130]
+	[StartChoice]
+	[Option 0]In the first place, I don't[BR]
+	[Right 20]appreciate this attack[BR]
+	[Right 20]on my character.[BR]
+	[Option 1][NOTE] If you knew what I was[BR]
+	[Right 20]packin', you'd be out of[BR]
+	[Right 20]my face! [NOTE][BR]
+	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
+	[EndChoice][End]
 }
 
 #message:0A:019
 {
-	[Style Right]
-	[Voice Star]First, Mario,[BR]
-	[Wait][Next]
-	choose the Jump command and[BR]
-	then decide which enemy you[BR]
-	want to attack.[Wait][End]
+	[Style Choice pos=45,30 size=235,130]
+	[StartChoice]
+	[Option 0]Who even are you? Your[BR]
+	[Right 20]name is silly and your[BR]
+	[Right 20]outfit is tacky.[BR]
+	[Option 1][NOTE] I got more names than[BR]
+	[Right 20]the guestbook at yo'[BR]
+	[Right 20]momma's place! [NOTE][BR]
+	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
+	[EndChoice][End]
 }
 
 #message:0A:01A
 {
-	[Style Right]
-	[Voice Star]Once you decide on the enemy,[BR]
-	the explanation of the action[BR]
-	command will appear.[Wait][End]
+	[Style Choice pos=45,30 size=235,130]
+	[StartChoice]
+	[Option 0]If this is your idea of[BR]
+	[Right 20]making friends, then[BR]
+	[Right 20]you are sorely misguided.[BR]
+	[Option 1][NOTE] I'm a flyin' superstar,[BR]
+	[Right 20]you're a one-scene[BR]
+	[Right 20]punching bag! [NOTE][BR]
+	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
+	[EndChoice][End]
 }
 
 #message:0A:01B
 {
-	[Style Right]
-	[Voice Star]Right now![BR]
-	[Pause 10]Just before stomping the enemy.[BR]
-	[Wait][Next]
-	Press [A] at exactly this moment.[BR]
-	[Yield][End]
+	[Style Choice pos=45,30 size=235,130]
+	[StartChoice]
+	[Option 0]Frankly, you would have[BR]
+	[Right 20]had more luck assaulting[BR]
+	[Right 20]me with fisticuffs.[BR]
+	[Option 1][NOTE] Your dancing moves[BR]
+	[Right 20]ain't even fly; you zigged[BR]
+	[Right 20]but should'a zagged! [NOTE][BR]
+	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
+	[EndChoice][End]
 }
 
 #message:0A:01C
 {
 	[Style Right]
-	[Voice Star]Press [A] at exactly this moment.[Wait][End]
+	He's spittin' mad fire, bro![BR]
+	You gotta tap out![Wait][End]
 }
 
 #message:0A:01D
 {
 	[Style Right]
-	[Voice Star]When you see "Nice" appear,[BR]
-	it means you've successfully[BR]
-	used the action command![BR]
-	[Wait][Next]
-	When you do, you'll increase[BR]
-	the amount of damage you do.[BR]
-	[Pause 10]OK, now this time, Goombario,[BR]
-	you try to attack Mario.[Wait][End]
+	Relax, homie. Wait 'til I hit him[BR]
+	with THIS![Wait][End]
 }
 
 #message:0A:01E
 {
 	[Style Right]
-	OK![BR]
-	[Pause 10]Here it comes, Mario![Wait][End]
+	[NOTE] I'm the hot new happening,[BR]
+	you've got nothing more! [NOTE][BR]
+	[Wait][Next]
+	[NOTE] Bro, you've had ZERO game[BR]
+	since 2004! [NOTE][BR]
+	[Wait][Next]
+	[NOTE] You're ancient, you're ugly,[BR]
+	you're slightly too fat! [NOTE][BR]
+	[Wait][Next]
+	[NOTE] Take a knee - you'll be wearing[BR]
+	ME as a hat! [NOTE][Wait][End]
 }
 
 #message:0A:01F
 {
-	[Style Right]
-	[Voice Star]Right now![BR]
-	[Wait][Next]
-	Press [A] just before the attack[BR]
-	strikes you.[BR]
-	[Yield][End]
+	[Style Choice pos=45,30 size=235,110]
+	[StartChoice]
+	[Option 0]I have nothing more to say[BR]
+	[Right 20]to you.[BR]
+	[Option 1][NOTE] Bro, your life's purpose[BR]
+	[Right 20]is to be my stepping[BR]
+	[Right 20]stool! [NOTE][BR]
+	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
+	[EndChoice][End]
 }
 
 #message:0A:020
 {
-	[Style Right]
-	[Voice Star]Yes! You successfully used the[BR]
-	action command.[BR]
-	[Pause 10]This will reduce the amount of[BR]
-	damage you receive.[BR]
-	[Wait][Next]
-	Often you'll have to use [BR]
-	different techniques to make[BR]
-	use of the action command.[BR]
-	It depends on the attack.[BR]
-	[Wait][Next]
-	Try attacking by Hammer.[Wait][End]
+	[Style Choice pos=45,30 size=235,100]
+	[StartChoice]
+	[Option 0]...[BR]
+	[Option 1][NOTE] You wouldn't exist at[BR]
+	[Right 20]all without me, you[BR]
+	[Right 20]dang fool! [NOTE][BR]
+	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
+	[EndChoice][End]
 }
 
 #message:0A:021
 {
-	[Style Right]
-	[Voice Star]Often you'll have to use[BR]
-	different techniques to make[BR]
-	use of the action command.[BR]
-	It depends on the attack.[BR]
-	[Wait][Next]
-	Try attacking by Hammer.[Wait][End]
+	[Style Choice pos=45,30 size=235,100]
+	[StartChoice]
+	[Option 0]...[BR]
+	[Option 1][NOTE] All I hear when you rap[BR]
+	[Right 20]is boring "Blah, blah,[BR]
+	[Right 20]blah"! [NOTE][BR]
+	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
+	[EndChoice][End]
 }
 
 #message:0A:022
 {
-	[Style Right]
-	[Voice Star]Once you choose an enemy to[BR]
-	attack, move the Control Stick[BR]
-	to the left.[BR]
-	[Wait][Next]
-	OK. Move the Control Stick.[BR]
-	[Yield][End]
+	[Style Choice pos=45,30 size=235,65]
+	[StartChoice]
+	[Option 0]...[BR]
+	[Option 1][NOTE] Um... [NOTE][BR]
+	[Option 2]AAAAAAAAAAAAAAAAAAH![BR]
+	[EndChoice][End]
 }
 
 #message:0A:023
 {
 	[Style Right]
-	[Voice Star]Move the Control Stick to the[BR]
-	left and keep it there.[BR]
-	[Pause 10]Don't let it go.[BR]
-	[Yield][End]
+	Whoa...[Pause 20] Those rhymes are FIRE![BR]
+	[Wait][Next]
+	Looks like I have no choice but[BR]
+	to pull out my ultimate weapon![Wait][End]
 }
 
 #message:0A:024
 {
 	[Style Right]
-	[Voice Star][STAR] flashes as soon as your power[BR]
-	reaches its maximum.[BR]
-	That's when you let go![BR]
-	[Yield][End]
+	Ha ha ha! Prepare to face your[BR]
+	incredibly painful doom![BR]
+	[Wait][Next]
+	My propane-powered, wood-based[BR]
+	destroy-o-bot has absolutely[BR]
+	NO weaknesses![BR]
+	[Wait][Next]
+	Just try and jump on it! I bet[BR]
+	you can't! We'll see what happens[BR]
+	then!
+	[Wait][End]
 }
 
 #message:0A:025
 {
 	[Style Right]
-	[Voice Star]All right! You successfully used[BR]
-	the action command![BR]
-	[Wait][Next]
-	Well, Mario,[BR]
-	[Pause 10]do you understand the ins and[BR]
-	outs of the action command?[BR]
-	[Wait][Next]
-	Let's practice a bit to make[BR]
-	sure you've mastered how to use[BR]
-	it properly.[BR]
-	[Yield][End]
+	Mario, can I have a word with[BR]
+	you for a moment?
+	[Wait][End]
 }
 
 #message:0A:026
 {
 	[Style Right]
-	[Voice Star]Well, Mario,[BR]
-	[Pause 10]do you understand the ins and[BR]
-	outs of the action command?[BR]
+	I just got off the phone with[BR]
+	Griff T. from the finance[BR]
+	department, and we have some...[Pause 15][BR]
+	concerns.[BR]
 	[Wait][Next]
-	Let's practice a bit to make[BR]
-	sure you've mastered how to use[BR]
-	it properly.[BR]
-	[Yield][End]
+	We went over your proposed[BR]
+	script together, and between the[BR]
+	train crash, the explosive robot[BR]
+	battle, the space sequence...[BR]
+	[Wait][Next]
+	...along with certain other things[BR]
+	that don't bear repeating...[BR]
+	[Wait][Next]
+	To say nothing of the logistical,[BR]
+	moral, or dietary concerns,[BR]
+	absolutely none of this is in our[BR]
+	budget.[BR]
+	[Wait][Next]
+	If we want this thing to wrap,[BR]
+	we need to immediately cut back[BR]
+	on spending.[BR]
+	[Wait][Next]
+	From now on, only simple,[BR]
+	affordable adventures, all right?[BR]
+	[Pause 10]...Good.[BR]
+	[Wait][Next]
+	Now let's wrap this up and bring[BR]
+	it to the cheapest set we have.
+	[Wait][End]
 }
 
 #message:0A:027

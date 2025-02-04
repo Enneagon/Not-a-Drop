@@ -1,4 +1,4 @@
-% Auto-generated script for not_01
+% Auto-generated script for not_02
 
 #new:Header $Header
 {
@@ -15,7 +15,7 @@
 
 #new:Script_Main $Script_Main
 {
-	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Set   *GB_WorldLocation  .Location:GoombaVillage
 	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
 	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
 	Call  SetCamEnabled      ( .Cam:Default .True
@@ -39,8 +39,8 @@
 
 #new:Script $Script_SetupMusic
 {
-	Call  FadeOutMusic  ( 00000000 500` ) % usually between 500-1000
-	Call  PlayAmbientSounds  ( .AmbientSounds:Wind )
+	Call  SetMusicTrack ( 00000000 .Song:GoombaVillage 00000000 00000008 )
+	Call  ClearAmbientSounds ( 250` )
 	Return
 	End
 }

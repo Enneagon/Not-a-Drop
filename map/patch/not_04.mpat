@@ -1,0 +1,116 @@
+@ $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Exec  $Script_SetupMusic
+    Call  MakeNpcs  ( .False $NpcGroupList_8024A88C )
+    Exec  $Script_TestFires
+	Exec  $Script_EnterMap
+	Return
+	End
+}
+
+#new:NpcGroupList $NpcGroupList_8024A88C
+{
+	00000004 $NpcGroup_8024A4AC 00000000
+	00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_8024A4AC
+{
+	00000000 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy1 % 0 -1000 0
+	00001F0D $Script_Init_8024A3FD 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy1
+	~AnimationTable:Fuzzy1 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000001 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy2 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy2
+	~AnimationTable:Fuzzy2 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000002 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy3 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy3
+	~AnimationTable:Fuzzy3 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+    %
+    00000003 $NpcSettings_8024A3D0 ~Vec3f:Fuzzy4 % 0 -1000 0
+	00001F0D 00000000 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Fuzzy4
+	~AnimationTable:Fuzzy4 % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+}
+
+#new:NpcSettings $NpcSettings_8024A3D0
+{
+	00000000 00180018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+
+#new:Script $Script_Init_8024A3FD
+{
+   68:  Call  SetNpcYaw ( 0 270` )
+  348:  Return
+  350:  End
+}
+
+#new:Script $Script_TestFires
+{
+    Loop
+        Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+        Sub *Var1 10`
+        Sub *Var2 6`
+        Call  PlayEffect        ( ~FX:Fire:LargeRed *Var0 *Var1 *Var2 *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+        Wait 1`
+        Call RemoveEffect ( *VarA )
+    EndLoop
+    Return
+    End
+}
+
+@ $Script_EnterMap
+{
+    Call DisablePlayerInput ( .True )
+    Thread
+        Call SetNpcAnimation ( 1 002B0103 )
+        Call NpcMoveTo ( 1 180` -39` 190` )
+    EndThread
+    Thread
+        Call SetNpcAnimation ( 2 002B0203 )
+        Call NpcMoveTo ( 2 180` 45` 260` )
+    EndThread
+    Thread
+        Call SetNpcAnimation ( 3 002B0303 )
+        Call NpcMoveTo ( 3 180` 72` 220` )
+    EndThread
+    Thread
+        Call SetPlayerAnimation ( .PlayerAnim:Flailing )
+        Wait 30`
+        Call SetPlayerSpeed ( *Fixed[5.0] )
+        Call PlayerJump1 ( 45` 100` 0` 30` )
+        Call PlaySoundAtPlayer ( .Sound:SoftLand 00000000 )
+    EndThread
+    Call  SpeakToPlayer     ( 0 002B000C 002B0001 00000000 000A0012 )
+    Call SetPlayerAnimation ( .PlayerAnim:DustOff )
+    Call UseSettingsFrom ( .Cam:Default 0` -200` 0` )
+    Call PanToTarget ( .Cam:Default .Easing:Linear 00000001 )
+    Call SetNpcAnimation ( 0 002B0002 )
+    Call NpcMoveTo ( 0 0` 0` 30` )
+    Call SetNpcAnimation ( 0 002B0001 )
+    Call SetPlayerAnimation ( .PlayerAnim:StandStill )
+    Call  SpeakToPlayer     ( 0 002B000C 002B0001 00000000 000A0013 )
+    Call SetPlayerAnimation ( .PlayerAnim:ThumbsUp )
+    Wait 30`
+    Call GotoMapSpecial ( "not_05" 00000000 000000A )
+	Return
+	End
+}

@@ -1,4 +1,4 @@
-% Auto-generated script for not_01
+% Auto-generated script for not_06
 
 #new:Header $Header
 {
@@ -39,8 +39,8 @@
 
 #new:Script $Script_SetupMusic
 {
-	Call  FadeOutMusic  ( 00000000 500` ) % usually between 500-1000
-	Call  PlayAmbientSounds  ( .AmbientSounds:Wind )
+	Call  SetMusicTrack ( 00000000 .Song:FuzzyAttack 00000000 00000008 )
+	Call  ClearAmbientSounds ( 250` )
 	Return
 	End
 }

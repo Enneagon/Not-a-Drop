@@ -16,7 +16,7 @@
   124:  Wait  12`
   130:  Call  ShowMessageAtScreenPos    ( 000A0000  160`  40` ) % I'm throwing a party at my castle today! Mario and ...
   148:  Wait  3`
-  154:  Call  GotoMapSpecial        ( "not_01" 00000001 00000007 ) % kmr_20
+  154:  Call  GotoMapSpecial        ( "not_01" 00000000 00000007 ) % kmr_20
   16C:  Wait  40`
   178:  Return
   180:  End
