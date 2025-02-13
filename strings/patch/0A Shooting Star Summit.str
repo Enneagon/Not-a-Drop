@@ -480,47 +480,38 @@
 #message:0A:027
 {
 	[Style Right]
-	[Voice Star]You don't need to practice[BR]
-	anymore...?[BR]
-	[Pause 10]That's our Mario![BR]
-	[Pause 5]You're a quick learner.[BR]
-	[Wait][Next]
-	Well, [Pause 5]I guess that's about all I[BR]
-	can teach you.[Wait][End]
+	He touched grass! GET HIM![Wait][End]
 }
 
 #message:0A:028
 {
 	[Style Right]
-	[Voice Star]The action command will serve[BR]
-	you well, so practice it.[BR]
+	Welp. You're hecking nicked, boy.[BR]
+	Welcome to the slammer.[BR]
 	[Wait][Next]
-	If you're done with this training[BR]
-	session, choose the End Training[BR]
-	command.[Wait][End]
+	Best start smashing blocks, if[BR]
+	you know what's good for you.[Wait][End]
 }
 
 #message:0A:029
 {
 	[Style Right]
-	[Voice Star]Well done, Mario!![BR]
-	[Pause 5]You successfully used the[BR]
-	action command.[BR]
-	[Pause 5]You have great timing![Wait][End]
+	Welcome to the blockhouse,[BR]
+	we got fun and games.[BR]
+	We got everything you want,[BR]
+	as long as that thing is blocks.[Wait][End]
 }
 
 #message:0A:02A
 {
 	[Style Right]
-	[Voice Star]Almost!![BR]
-	[Pause 5]That was a little bit too early.[Wait][End]
+	Hurry, Mario! Quick! Jump for it![Wait][End]
 }
 
 #message:0A:02B
 {
-	[Style Right]
-	[Voice Star]Almost!![BR]
-	[Pause 5]That was a little bit too late.[Wait][End]
+	[Style Sign]
+	[Down 15][Size 36]              FIN[Pause 200][Wait][End]
 }
 
 #message:0A:02C

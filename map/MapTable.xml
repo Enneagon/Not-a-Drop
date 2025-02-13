@@ -576,6 +576,9 @@
 		<Map name="not_04" nickname="Big Race"/>
 		<Map name="not_05" nickname="Hotel Room"/>
 		<Map name="not_06" nickname="Disco"/>
+		<Map name="not_07" nickname="Sensible"/>
+		<Map name="not_08" nickname="Prison"/>
+		<Map name="not_09" nickname="Pier"/>
 	</Area>
 	<Resource name="mac_tex" compressed="false"/>
 	<Resource name="tik_tex" compressed="false"/>

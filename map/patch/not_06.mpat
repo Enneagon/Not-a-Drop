@@ -263,14 +263,15 @@
     Call SetPlayerAnimation ( .PlayerAnim:ReadyJump )
     Wait 60`
     Call  FadeOutMusic  ( 00000000 500` ) % usually between 500-1000
-    Call SpeakToPlayer ( A 00A90001 00A90006 00000000 000A0025 )
+    Call SpeakToPlayer ( A 00A90006 00A90001 00000000 000A0025 )
     Call SetPlayerSpeed ( *Fixed[2.0] )
     Call PlayerMoveTo ( *Var0 150` 0` )
     Call UseSettingsFrom ( .Cam:Default -250` 0` 150` )
     Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
     Call PlayerMoveTo ( -250` 150` 0` )
     Wait 10`
-    Call SpeakToPlayer ( A 00A90001 00A90006 00000000 000A0026 )
+    Call SpeakToPlayer ( A 00A90006 00A90001 00000000 000A0026 )
+    Call GotoMapSpecial ( "not_07" 00000000 000000B )
     Return
     End
 }

@@ -1,0 +1,92 @@
+@ $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Exec  $Script_SetupMusic
+    Call  MakeNpcs  ( .False $NpcGroupList_8024A88C )
+    Exec  $Script_TestFires
+    Bind $Script_Final .Trigger:FloorTouch ~Collider:WaterCollider 1 0
+	Exec  $Script_EnterMap
+	Return
+	End
+}
+
+#new:Script $Script_TestFires
+{
+    Loop
+        Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+        Sub *Var1 10`
+        Sub *Var2 6`
+        Call  PlayEffect        ( ~FX:Fire:LargeRed *Var0 *Var1 *Var2 *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+        Wait 1`
+        Call RemoveEffect ( *VarA )
+    EndLoop
+    Return
+    End
+}
+
+#new:NpcGroupList $NpcGroupList_8024A88C
+{
+	00000001 $NpcGroup_8024A4AC 00000000
+	00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_8024A4AC
+{
+    00000000 $NpcSettings_8024A3D0 ~Vec3f:Luigi % 0 -1000 0
+	00000D01 $Script_Init_8024A3FD 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Luigi
+	~AnimationTable:Luigi % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+}
+
+#new:NpcSettings $NpcSettings_8024A3D0
+{
+	00000000 001E0018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+
+#new:Script $Script_Init_8024A3FD
+{
+   68:  Call  SetNpcYaw ( 0 270` )
+  348:  Return
+  350:  End
+}
+
+@ $Script_EnterMap
+{
+	Call  GetEntryID    ( *Var[0] )
+	Switch  *Var[0]
+		Case  ==  ~Entry:entry_w
+			Set   *Var[0] $Script_CreateExitTriggers
+			Exec  EnterWalk
+            Call DisablePlayerInput ( .True )
+            Wait 20`
+            Call SetCamSpeed ( .Cam:Default *Fixed[3.0] )
+            Call UseSettingsFrom ( .Cam:Default 520` 20` -50` )
+            Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+            Call SpeakToPlayer ( 0 00820014 00820004 00000000 000A002A )
+            Call UseSettingsFrom ( .Cam:Default 92` 0` -26` )
+            Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+            Wait 30`
+            Call DisablePlayerInput ( .False )
+		Default
+			Exec  $Script_CreateExitTriggers
+	EndSwitch
+	Return
+	End
+}
+
+#new:Script $Script_Final
+{
+    Call DisablePlayerInput ( .True )
+    Wait 120`
+    Call  ShowMessageAtScreenPos    ( 000A002B  160`  140` ) % Mario's Star Energy goes up to 3! Mario can now us ...
+    Unbind
+    Return
+    End
+}

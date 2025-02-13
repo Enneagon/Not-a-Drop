@@ -1,0 +1,96 @@
+@ $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+    Exec  $Script_MakeEntities
+	Exec  $Script_SetupMusic
+    Exec  $Script_TestFires
+	Call  MakeNpcs  ( .False $NpcGroupList_8024A88C )
+	Exec  $Script_EnterMap
+	Return
+	End
+}
+
+#new:Script $Script_TestFires
+{
+    Loop
+        Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+        Sub *Var1 10`
+        Sub *Var2 6`
+        Call  PlayEffect        ( ~FX:Fire:LargeRed *Var0 *Var1 *Var2 *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+        Wait 1`
+        Call RemoveEffect ( *VarA )
+    EndLoop
+    Return
+    End
+}
+
+#new:NpcGroupList $NpcGroupList_8024A88C
+{
+	00000001 $NpcGroup_8024A4AC 00000000
+	00000000 00000000 00000000
+}
+
+#new:NpcGroup $NpcGroup_8024A4AC
+{
+    00000000 $NpcSettings_8024A3D0 ~Vec3f:Guard % 0 -1000 0
+	00000D01 $Script_Init_8024A3FD 00000000 00000000 0000005A
+	~NoDrops
+	~Movement:Guard
+	~AnimationTable:Guard % .Sprite
+	00000000 00000000 00000000 00000000 % no tattle string
+}
+
+#new:NpcSettings $NpcSettings_8024A3D0
+{
+	00000000 001E0018 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00630000
+}
+
+#new:Script $Script_Init_8024A3FD
+{
+   68:  Call  SetNpcYaw ( 0 270` )
+   Call  BindNpcInteract   ( .Npc:Self $Script_Interact_80241300 )
+  348:  Return
+  350:  End
+}
+
+#new:Script $Script_Interact_80241300
+{
+    0:  Call SpeakToPlayer ( .Npc:Self 00870004 00870001 00000000 000A0029 )
+   20:  Return
+   28:  End
+}
+
+#new:Script $Script_MakeEntities
+{
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block1 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block2 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block3 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block4 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block5 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block6 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block7 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block8 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block9 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block10 80000000 )
+    Call  MakeEntity    ( .Entity:Hammer1Block ~Vec4d:Block11 80000000 )
+    Return
+    End
+}
+
+@ $Script_EnterMap
+{
+    Call DisablePlayerInput ( .True )
+    Wait 5`
+    Call PlaySoundAtPlayer ( .Sound:CreakyDoorClose 00000008 )
+    Wait 20`
+    Call SpeakToPlayer ( 0 00870004 00870001 00000000 000A0028 )
+    Call DisablePlayerInput ( .False )
+    Exec $Script_CreateExitTriggers
+    Return
+    End
+}

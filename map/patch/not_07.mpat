@@ -1,0 +1,49 @@
+@ $Script_Main
+{
+	Set   *GB_WorldLocation  .Location:GoombaRoad
+	Call  SetCamPerspective  ( .Cam:Default 00000003 00000019 00000010 00001000 )
+	Call  SetCamBGColor      ( .Cam:Default 00000000 00000000 00000000 )
+	Call  SetCamEnabled      ( .Cam:Default .True
+	Call  SetCamLeadPlayer   ( .Cam:Default .False )
+	Exec  $Script_MakeEntities
+    Exec  $Script_TestFires
+    Bind  $Script_TouchGrass .Trigger:FloorTouch ~Collider:GrassCollider 1 0
+	Exec  $Script_SetupMusic
+	Exec  $Script_EnterMap
+	Return
+	End
+}
+
+#new:Script $Script_TestFires
+{
+    Loop
+        Call GetPlayerPos ( *Var0 *Var1 *Var2 )
+        Sub *Var1 10`
+        Sub *Var2 6`
+        Call  PlayEffect        ( ~FX:Fire:LargeRed *Var0 *Var1 *Var2 *Fixed[0.7] *VarA 00000000 00000000 00000000 00000000 00000000 00000000 00000000 )
+        Wait 1`
+        Call RemoveEffect ( *VarA )
+    EndLoop
+    Return
+    End
+}
+
+@Message $String_ReadSign_Sign
+{
+	[DelayOff][STYLE:SIGN]
+	[CenterX:FF]
+	[Down:03]Please stay off the grass.
+	[DelayOn][WAIT][END]
+}
+
+#new:Script $Script_TouchGrass
+{
+	Call DisablePlayerInput ( .True )
+	Call  ShowMessageAtScreenPos    ( 000A0027  160`  40` ) % Mario's Star Energy goes up to 3! Mario can now us ...
+    Call SetPlayerAnimation ( .PlayerAnim:Flailing )
+	Wait 10`
+	Call GotoMapSpecial ( "not_08" 00000000 000000A )
+	Unbind
+    Return
+    End
+}
