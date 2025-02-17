@@ -86,7 +86,7 @@
 {
     Call DisablePlayerInput ( .True )
     Wait 5`
-    Call PlaySoundAtPlayer ( .Sound:CreakyDoorClose 00000008 )
+    Call PlaySoundAtPlayer ( .Sound:MetalDoorClose 00000008 )
     Wait 20`
     Call SpeakToPlayer ( 0 00870004 00870001 00000000 000A0028 )
     Call DisablePlayerInput ( .False )

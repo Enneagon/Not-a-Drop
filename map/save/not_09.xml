@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Map name="not_09" author="unnamed" background="kmr_bg" textures="kmr_tex">
 	<Editor>
-		<Camera pos="635.563171,144.036804,3.627197" pitch="10.000000" yaw="-90.000000"/>
-		<Camera pos="-47.332832,65536.000000,-86.885101"/>
+		<Camera pos="370.815796,24.036812,236.915619" pitch="10.000000" yaw="-90.000000"/>
+		<Camera pos="-81.241272,65536.000000,1745.614136"/>
 		<Camera pos="65536.000000,18.568293,-17.217569"/>
 		<Camera pos="-50.335461,-1.119970,65536.000000"/>
 	</Editor>
@@ -46,7 +46,7 @@
 	<Models>
 		<Model ver="2" type="ROOT" lightset="0">
 			<MapObject name="Root" id="5"/>
-			<BoundingBox empty="false" min="-1546,-49,-366" max="2358,200,654"/>
+			<BoundingBox empty="false" min="-1546,-49,-366" max="2358,200,1700"/>
 			<PropertyList>
 			</PropertyList>
 		</Model>
@@ -113,11 +113,11 @@
 							<Vertex xyz="406,0,-366" uv="0,551"/>
 							<Vertex xyz="-1546,0,-366" uv="-204,551"/>
 							<Vertex xyz="406,0,144" uv="0,755"/>
-							<Vertex xyz="-1546,0,654" uv="-204,959"/>
-							<Vertex xyz="406,0,654" uv="0,959"/>
+							<Vertex xyz="-1546,0,1700" uv="-204,959"/>
+							<Vertex xyz="406,0,1700" uv="0,959"/>
 							<Vertex xyz="2358,0,-366" uv="204,551"/>
 							<Vertex xyz="2358,0,144" uv="204,755"/>
-							<Vertex xyz="2358,0,654" uv="204,959"/>
+							<Vertex xyz="2358,0,1700" uv="204,959"/>
 						</VertexTable>
 						<TriangleList>
 							<Triangle ijk="0,1,2"/>
@@ -510,7 +510,7 @@
 			<HitObject type="ROOT"/>
 		</Zone>
 		<Zone ver="0">
-			<MapObject name="FloorZone" id="1"/>
+			<MapObject name="FloorZone" id="1" hidden="true"/>
 			<HitObject type="HIT"/>
 			<HitMesh ver="0">
 				<TriangleBatch ver="0">
@@ -528,10 +528,10 @@
 					</TriangleList>
 				</TriangleBatch>
 			</HitMesh>
-			<Camera type="TYPE_0" flag="false" boomLength="450.000000" boomPitch="16.000000" viewPitch="-6.000000" posA="0,10,95" posB="-132,10,30" posC="10,0,10"/>
+			<Camera type="TYPE_4" flag="false" boomLength="450.000000" boomPitch="16.000000" viewPitch="-6.000000" posA="632,10,65" posB="500,10,0" posC="10,0,10"/>
 		</Zone>
 		<Zone ver="0">
-			<MapObject name="FloorZone" id="0"/>
+			<MapObject name="FloorZone" id="0" hidden="true"/>
 			<HitObject type="HIT"/>
 			<HitMesh ver="0">
 				<TriangleBatch ver="0">
@@ -573,7 +573,7 @@
 					</TriangleList>
 				</TriangleBatch>
 			</HitMesh>
-			<Camera type="TYPE_6" flag="false" boomLength="450.000000" boomPitch="16.000000" viewPitch="-6.000000" posA="0,10,50" posB="0,10,-50" posC="10,0,10"/>
+			<Camera type="TYPE_0" flag="false" boomLength="450.000000" boomPitch="16.000000" viewPitch="-6.000000" posA="700,10,200" posB="300,10,200" posC="10,0,10"/>
 		</Zone>
 	</Zones>
 	<Markers>

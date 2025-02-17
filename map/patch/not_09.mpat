@@ -68,10 +68,16 @@
             Wait 20`
             Call SetCamSpeed ( .Cam:Default *Fixed[3.0] )
             Call UseSettingsFrom ( .Cam:Default 520` 20` -50` )
+            Call SetCamTarget ( .Cam:Default 520` 20` -50` )
             Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+            Call WaitForCam ( .Cam:Default *Fixed[1.0] )
+            Wait 10`
             Call SpeakToPlayer ( 0 00820014 00820004 00000000 000A002A )
-            Call UseSettingsFrom ( .Cam:Default 92` 0` -26` )
-            Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+%            Call UseSettingsFrom ( .Cam:Default 92` 0` -26` )
+%            Call SetCamTarget ( .Cam:Default 92` 0` -26` )
+%            Call  PanToTarget       ( .Cam:Default 00000000 00000001 )
+%            Call WaitForCam ( .Cam:Default *Fixed[1.0] )
+%            Call SetCamLeadPlayer ( .Cam:Default .True )
             Wait 30`
             Call DisablePlayerInput ( .False )
 		Default
